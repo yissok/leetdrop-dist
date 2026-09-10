@@ -1,0 +1,38 @@
+{
+  "id": "maximum-sum-circular-subarray",
+  "title": "Maximum Sum Circular Subarray",
+  "sourcePath": "120/113_maximum_sum_circular_subarray",
+  "hash": "6b7f3dd734d6ade7c8696f893e02f3411b0203cb35e1ca54c27b43458fe1c07f",
+  "topics": [
+    "Dynamic programming"
+  ],
+  "skillIds": [
+    "dp.state"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>113-maximum-sum-circular-subarray</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Maximum Sum Circular Subarray\n\n## Problem Description\n\nGiven a circular integer array `nums` of length `n`, return the maximum possible sum of a non-empty subarray of `nums`.\n\nA circular array means the end of the array connects to the beginning. Formally, the next element of `nums[i]` is `nums[(i + 1) % n]`, and the previous element is `nums[(i - 1 + n) % n]`.\n\nA subarray may only use each index at most once.\n\n## Input / Output\n\n### Input\n\n- A circular integer array `nums`\n\n### Output\n\n- The maximum sum of a non-empty subarray\n\n## Examples\n\n### Example 1\n\nInput:\n\n    nums = [1,-2,3,-2]\n\nOutput:\n\n    3\n\n### Example 2\n\nInput:\n\n    nums = [5,-3,5]\n\nOutput:\n\n    10\n\n### Example 3\n\nInput:\n\n    nums = [-3,-2,-3]\n\nOutput:\n\n    -2\n\n## Constraints\n\n- n == nums.length\n- 1 <= n <= 30,000\n- -30,000 <= nums[i] <= 30,000\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "class Completed {\n\n    public int maxSubarraySumCircular(int[] nums) {\n\n        int total = 0;\n        int maxSum = nums[0];\n        int curMax = 0;\n        int minSum = nums[0];\n        int curMin = 0;\n\n        for (int num : nums) {\n\n            curMax = Math.max(curMax + num, num);\n            maxSum = Math.max(maxSum, curMax);\n\n            curMin = Math.min(curMin + num, num);\n            minSum = Math.min(minSum, curMin);\n\n            total += num;\n        }\n\n        if (maxSum < 0) {\n            return maxSum;\n        }\n\n        return Math.max(maxSum, total - minSum);\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public int maxSubarraySumCircular(int[] nums) {\n\n        return 0;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"120/113_maximum_sum_circular_subarray (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnMaxNonCircularSubarray() {\n\n        Solution solution = new Solution();\n\n        assertEquals(3, solution.maxSubarraySumCircular(new int[]{1, -2, 3, -2}));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldUseCircularWrap() {\n\n        Solution solution = new Solution();\n\n        assertEquals(10, solution.maxSubarraySumCircular(new int[]{5, -3, 5}));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleAllNegative() {\n\n        Solution solution = new Solution();\n\n        assertEquals(-2, solution.maxSubarraySumCircular(new int[]{-3, -2, -3}));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleSingleElement() {\n\n        Solution solution = new Solution();\n\n        assertEquals(5, solution.maxSubarraySumCircular(new int[]{5}));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleAllPositive() {\n\n        Solution solution = new Solution();\n\n        assertEquals(15, solution.maxSubarraySumCircular(new int[]{1, 2, 3, 4, 5}));\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"120/113_maximum_sum_circular_subarray\")\nclass SolutionTest {\n\n    @Test\n    void shouldReturnMaxNonCircularSubarray() {\n\n        Completed solution = new Completed();\n\n        assertEquals(3, solution.maxSubarraySumCircular(new int[]{1, -2, 3, -2}));\n    }\n\n    @Test\n    void shouldUseCircularWrap() {\n\n        Completed solution = new Completed();\n\n        assertEquals(10, solution.maxSubarraySumCircular(new int[]{5, -3, 5}));\n    }\n\n    @Test\n    void shouldHandleAllNegative() {\n\n        Completed solution = new Completed();\n\n        assertEquals(-2, solution.maxSubarraySumCircular(new int[]{-3, -2, -3}));\n    }\n\n    @Test\n    void shouldHandleSingleElement() {\n\n        Completed solution = new Completed();\n\n        assertEquals(5, solution.maxSubarraySumCircular(new int[]{5}));\n    }\n\n    @Test\n    void shouldHandleAllPositive() {\n\n        Completed solution = new Completed();\n\n        assertEquals(15, solution.maxSubarraySumCircular(new int[]{1, 2, 3, 4, 5}));\n    }\n}\n"
+    }
+  ]
+}

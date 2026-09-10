@@ -1,0 +1,38 @@
+{
+  "id": "maximum-subarray",
+  "title": "Maximum Subarray",
+  "sourcePath": "120/112_maximum_subarray",
+  "hash": "8301cd2b2cfeab50b4df5cfca01af680769d5e9cd586633e38271182aef2b49d",
+  "topics": [
+    "Dynamic programming"
+  ],
+  "skillIds": [
+    "dp.state"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>112-maximum-subarray</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Maximum Subarray\n\n## Problem Description\n\nGiven an integer array `nums`, find the subarray with the largest sum, and return its sum.\n\n## Input / Output\n\n### Input\n\n- An integer array `nums`\n\n### Output\n\n- The largest sum of any contiguous subarray\n\n## Examples\n\n### Example 1\n\nInput:\n\n    nums = [-2,1,-3,4,-1,2,1,-5,4]\n\nOutput:\n\n    6\n\nExplanation: The subarray [4,-1,2,1] has the largest sum 6.\n\n### Example 2\n\nInput:\n\n    nums = [1]\n\nOutput:\n\n    1\n\n### Example 3\n\nInput:\n\n    nums = [5,4,-1,7,8]\n\nOutput:\n\n    23\n\n## Constraints\n\n- 1 <= nums.length <= 10^5\n- -10^4 <= nums[i] <= 10^4\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "class Completed {\n\n    public int maxSubArray(int[] nums) {\n\n        int best = nums[0];\n        int current = nums[0];\n\n        for (int i = 1; i < nums.length; i++) {\n            current = Math.max(nums[i], current + nums[i]);\n            best = Math.max(best, current);\n        }\n\n        return best;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public int maxSubArray(int[] nums) {\n\n        return 0;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"120/112_maximum_subarray (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldFindMaximumSubarraySum() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            6,\n            solution.maxSubArray(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleSingleElement() {\n\n        Solution solution = new Solution();\n\n        assertEquals(1, solution.maxSubArray(new int[]{1}));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldSumEntireArrayWhenAllPositive() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            23,\n            solution.maxSubArray(new int[]{5, 4, -1, 7, 8})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnLargestNegativeWhenAllNegative() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            -1,\n            solution.maxSubArray(new int[]{-5, -2, -1, -3})\n        );\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"120/112_maximum_subarray\")\nclass SolutionTest {\n\n    @Test\n    void shouldFindMaximumSubarraySum() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            6,\n            solution.maxSubArray(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4})\n        );\n    }\n\n    @Test\n    void shouldHandleSingleElement() {\n\n        Completed solution = new Completed();\n\n        assertEquals(1, solution.maxSubArray(new int[]{1}));\n    }\n\n    @Test\n    void shouldSumEntireArrayWhenAllPositive() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            23,\n            solution.maxSubArray(new int[]{5, 4, -1, 7, 8})\n        );\n    }\n\n    @Test\n    void shouldReturnLargestNegativeWhenAllNegative() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            -1,\n            solution.maxSubArray(new int[]{-5, -2, -1, -3})\n        );\n    }\n}\n"
+    }
+  ]
+}

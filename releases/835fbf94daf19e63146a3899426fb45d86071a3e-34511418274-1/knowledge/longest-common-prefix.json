@@ -1,0 +1,39 @@
+{
+  "id": "longest-common-prefix",
+  "title": "Longest Common Prefix",
+  "sourcePath": "20/20_longest_common_prefix",
+  "hash": "c1b8a1ba333d00eca3003bbb5e2ef8af55a570c17f076458dfdd1b6df22fd167",
+  "topics": [
+    "Arrays & strings"
+  ],
+  "skillIds": [
+    "scan.invariant",
+    "strings.boundaries"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>20-longest-common-prefix</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Longest Common Prefix\n\n## Problem Description\n\nGiven an array of strings `strs`, return the longest prefix string shared by **all** strings.\n\nIf they share no common prefix, return `\"\"`.\n\n## Clarifications\n\n- The prefix must appear at the start of every string.\n- If `strs` has one string, that whole string is the answer.\n- An empty string in the array forces the common prefix to be `\"\"`.\n- Comparison is case-sensitive as given (inputs are lowercase in typical tests).\n\n## Input\n\n- `strs`: array of strings\n\n## Output\n\n- Longest common prefix, or empty string\n\n## Examples\n\n### Example 1\n\nInput:\n\n    strs = [\"flower\",\"flow\",\"flight\"]\n\nOutput:\n\n    \"fl\"\n\nExplanation:\n\n    All three start with \"fl\", but the third characters differ (o vs i).\n\n### Example 2\n\nInput:\n\n    strs = [\"dog\",\"racecar\",\"car\"]\n\nOutput:\n\n    \"\"\n\nExplanation:\n\n    First letters already differ.\n\n### Example 3\n\nInput:\n\n    strs = [\"interspecies\",\"interstellar\",\"interstate\"]\n\nOutput:\n\n    \"inters\"\n\n### Example 4\n\nInput:\n\n    strs = [\"a\"]\n\nOutput:\n\n    \"a\"\n\n## Constraints\n\n- 1 <= strs.length <= 200\n- 0 <= strs[i].length <= 200\n- strs[i] consists of lowercase English letters if non-empty\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "class Completed {\n\n    public String longestCommonPrefix(String[] strs) {\n\n        if (strs == null || strs.length == 0) {\n            return \"\";\n        }\n\n        String prefix = strs[0];\n\n        for (int i = 1; i < strs.length; i++) {\n\n            while (!strs[i].startsWith(prefix)) {\n\n                prefix = prefix.substring(0, prefix.length() - 1);\n\n                if (prefix.isEmpty()) {\n                    return \"\";\n                }\n            }\n        }\n\n        return prefix;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public String longestCommonPrefix(String[] strs) {\n\n        return \"\";\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"20/20_longest_common_prefix (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnCommonPrefixForExample1() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            \"fl\",\n            solution.longestCommonPrefix(new String[]{\"flower\", \"flow\", \"flight\"})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnEmptyWhenNoCommonPrefix() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            \"\",\n            solution.longestCommonPrefix(new String[]{\"dog\", \"racecar\", \"car\"})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnLongerSharedPrefix() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            \"inters\",\n            solution.longestCommonPrefix(\n                new String[]{\"interspecies\", \"interstellar\", \"interstate\"}\n            )\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleSingleString() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            \"alone\",\n            solution.longestCommonPrefix(new String[]{\"alone\"})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleIdenticalStrings() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            \"same\",\n            solution.longestCommonPrefix(new String[]{\"same\", \"same\", \"same\"})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleEmptyStringInArray() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            \"\",\n            solution.longestCommonPrefix(new String[]{\"abc\", \"\", \"ab\"})\n        );\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"20/20_longest_common_prefix\")\nclass SolutionTest {\n\n    @Test\n    void shouldReturnCommonPrefixForExample1() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            \"fl\",\n            solution.longestCommonPrefix(new String[]{\"flower\", \"flow\", \"flight\"})\n        );\n    }\n\n    @Test\n    void shouldReturnEmptyWhenNoCommonPrefix() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            \"\",\n            solution.longestCommonPrefix(new String[]{\"dog\", \"racecar\", \"car\"})\n        );\n    }\n\n    @Test\n    void shouldReturnLongerSharedPrefix() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            \"inters\",\n            solution.longestCommonPrefix(\n                new String[]{\"interspecies\", \"interstellar\", \"interstate\"}\n            )\n        );\n    }\n\n    @Test\n    void shouldHandleSingleString() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            \"alone\",\n            solution.longestCommonPrefix(new String[]{\"alone\"})\n        );\n    }\n\n    @Test\n    void shouldHandleIdenticalStrings() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            \"same\",\n            solution.longestCommonPrefix(new String[]{\"same\", \"same\", \"same\"})\n        );\n    }\n\n    @Test\n    void shouldHandleEmptyStringInArray() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            \"\",\n            solution.longestCommonPrefix(new String[]{\"abc\", \"\", \"ab\"})\n        );\n    }\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "find-the-index-of-the-first-occurrence-in-a-string",
+  "title": "Find the Index of the First Occurrence in a String",
+  "sourcePath": "30/23_find_the_index_of_the_first_occurrence_in_a_string",
+  "hash": "993ffe41105f0618beb3c0a840ccb38b39ab338f96efc7641d9c62be2aee88aa",
+  "topics": [
+    "Arrays & strings"
+  ],
+  "skillIds": [
+    "strings.boundaries"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>23-find-the-index-of-the-first-occurrence-in-a-string</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Find the Index of the First Occurrence in a String\n\n## Problem Description\n\nGiven strings `haystack` and `needle`, return the **starting index** of the first occurrence of `needle` inside `haystack`.\n\nIf `needle` does not appear, return `-1`.\n\n## Clarifications\n\n- This is classic substring search (like `indexOf`).\n- Matching is exact and case-sensitive.\n- If `needle` is empty, many definitions return 0; under LeetCode constraints `needle` length is at least 1, so that edge may not appear.\n- Return the leftmost occurrence when multiple matches exist.\n\n## Input\n\n- `haystack`: string to search in\n- `needle`: string to find\n\n## Output\n\n- First starting index, or `-1`\n\n## Examples\n\n### Example 1\n\nInput:\n\n    haystack = \"sadbutsad\"\n    needle = \"sad\"\n\nOutput:\n\n    0\n\nExplanation:\n\n    \"sad\" occurs at index 0 and again at index 6; return the first (0).\n\n### Example 2\n\nInput:\n\n    haystack = \"leetcode\"\n    needle = \"leeto\"\n\nOutput:\n\n    -1\n\n### Example 3\n\nInput:\n\n    haystack = \"hello\"\n    needle = \"ll\"\n\nOutput:\n\n    2\n\n### Example 4\n\nInput:\n\n    haystack = \"aaa\"\n    needle = \"aaaa\"\n\nOutput:\n\n    -1\n\nExplanation:\n\n    needle is longer than haystack, so it cannot occur.\n\n## Constraints\n\n- 1 <= haystack.length, needle.length <= 10,000\n- haystack and needle consist of only lowercase English letters\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "class Completed {\n\n    public int strStr(String haystack, String needle) {\n\n        return haystack.indexOf(needle);\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public int strStr(String haystack, String needle) {\n\n        return 0;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"30/23_find_the_index_of_the_first_occurrence_in_a_string (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldFindOccurrenceAtStart() {\n\n        Solution solution = new Solution();\n\n        assertEquals(0, solution.strStr(\"sadbutsad\", \"sad\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnMinusOneWhenMissing() {\n\n        Solution solution = new Solution();\n\n        assertEquals(-1, solution.strStr(\"leetcode\", \"leeto\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldFindOccurrenceInMiddle() {\n\n        Solution solution = new Solution();\n\n        assertEquals(2, solution.strStr(\"hello\", \"ll\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleIdenticalStrings() {\n\n        Solution solution = new Solution();\n\n        assertEquals(0, solution.strStr(\"abc\", \"abc\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldFindAtEnd() {\n\n        Solution solution = new Solution();\n\n        assertEquals(2, solution.strStr(\"abc\", \"c\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleNeedleLongerThanHaystack() {\n\n        Solution solution = new Solution();\n\n        assertEquals(-1, solution.strStr(\"a\", \"aa\"));\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"30/23_find_the_index_of_the_first_occurrence_in_a_string\")\nclass SolutionTest {\n\n    @Test\n    void shouldFindOccurrenceAtStart() {\n\n        Completed solution = new Completed();\n\n        assertEquals(0, solution.strStr(\"sadbutsad\", \"sad\"));\n    }\n\n    @Test\n    void shouldReturnMinusOneWhenMissing() {\n\n        Completed solution = new Completed();\n\n        assertEquals(-1, solution.strStr(\"leetcode\", \"leeto\"));\n    }\n\n    @Test\n    void shouldFindOccurrenceInMiddle() {\n\n        Completed solution = new Completed();\n\n        assertEquals(2, solution.strStr(\"hello\", \"ll\"));\n    }\n\n    @Test\n    void shouldHandleIdenticalStrings() {\n\n        Completed solution = new Completed();\n\n        assertEquals(0, solution.strStr(\"abc\", \"abc\"));\n    }\n\n    @Test\n    void shouldFindAtEnd() {\n\n        Completed solution = new Completed();\n\n        assertEquals(2, solution.strStr(\"abc\", \"c\"));\n    }\n\n    @Test\n    void shouldHandleNeedleLongerThanHaystack() {\n\n        Completed solution = new Completed();\n\n        assertEquals(-1, solution.strStr(\"a\", \"aa\"));\n    }\n}\n"
+    }
+  ]
+}
