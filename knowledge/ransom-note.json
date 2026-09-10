@@ -1,0 +1,38 @@
+{
+  "id": "ransom-note",
+  "title": "Ransom Note",
+  "sourcePath": "40/39_ransom_note",
+  "hash": "1be42695e1f8a2ffe27cb540801e712efe0151a97fd4f9b025b53a66834bd751",
+  "topics": [
+    "Hashing"
+  ],
+  "skillIds": [
+    "frequency.balance"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>39-ransom-note</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Ransom Note\n\n## Problem Description\n\nGiven two strings `ransomNote` and `magazine`, return whether `ransomNote` can be constructed using letters from `magazine`.\n\nEach letter in `magazine` may be used **at most once**.\n\n## Clarifications\n\n- This is a multiset / frequency problem: counts in `magazine` must be enough for every character needed by `ransomNote`.\n- Order does not matter.\n- Case-sensitive: typically both are lowercase English letters.\n- If `ransomNote` is longer than `magazine`, answer is usually false (not enough letters).\n\n## Input\n\n- `ransomNote`: string to build\n- `magazine`: available letters\n\n## Output\n\n- `true` if constructible, else `false`\n\n## Examples\n\n### Example 1\n\nInput:\n\n    ransomNote = \"a\"\n    magazine = \"b\"\n\nOutput:\n\n    false\n\n### Example 2\n\nInput:\n\n    ransomNote = \"aa\"\n    magazine = \"ab\"\n\nOutput:\n\n    false\n\nExplanation:\n\n    Need two 'a's; magazine has only one.\n\n### Example 3\n\nInput:\n\n    ransomNote = \"aa\"\n    magazine = \"aab\"\n\nOutput:\n\n    true\n\n### Example 4\n\nInput:\n\n    ransomNote = \"\"\n    magazine = \"abc\"\n\nOutput:\n\n    true\n\nExplanation:\n\n    Empty note needs no letters.\n\n## Constraints\n\n- 1 <= ransomNote.length, magazine.length <= 100,000\n- ransomNote and magazine consist of lowercase English letters\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "class Completed {\n\n    public boolean canConstruct(String ransomNote, String magazine) {\n\n        int[] counts = new int[26];\n\n        for (int i = 0; i < magazine.length(); i++) {\n            counts[magazine.charAt(i) - 'a']++;\n        }\n\n        for (int i = 0; i < ransomNote.length(); i++) {\n\n            int index = ransomNote.charAt(i) - 'a';\n            counts[index]--;\n\n            if (counts[index] < 0) {\n                return false;\n            }\n        }\n\n        return true;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public boolean canConstruct(String ransomNote, String magazine) {\n\n        return false;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertFalse;\nimport static org.junit.jupiter.api.Assertions.assertTrue;\n\n@DisplayName(\"40/39_ransom_note (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnFalseWhenLetterMissing() {\n\n        Solution solution = new Solution();\n\n        assertFalse(solution.canConstruct(\"a\", \"b\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnFalseWhenNotEnoughLetters() {\n\n        Solution solution = new Solution();\n\n        assertFalse(solution.canConstruct(\"aa\", \"ab\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnTrueWhenEnoughLetters() {\n\n        Solution solution = new Solution();\n\n        assertTrue(solution.canConstruct(\"aa\", \"aab\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleExactMatch() {\n\n        Solution solution = new Solution();\n\n        assertTrue(solution.canConstruct(\"abc\", \"abc\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleExtraMagazineLetters() {\n\n        Solution solution = new Solution();\n\n        assertTrue(solution.canConstruct(\"a\", \"aa\"));\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertFalse;\nimport static org.junit.jupiter.api.Assertions.assertTrue;\n\n@DisplayName(\"40/39_ransom_note\")\nclass SolutionTest {\n\n    @Test\n    void shouldReturnFalseWhenLetterMissing() {\n\n        Completed solution = new Completed();\n\n        assertFalse(solution.canConstruct(\"a\", \"b\"));\n    }\n\n    @Test\n    void shouldReturnFalseWhenNotEnoughLetters() {\n\n        Completed solution = new Completed();\n\n        assertFalse(solution.canConstruct(\"aa\", \"ab\"));\n    }\n\n    @Test\n    void shouldReturnTrueWhenEnoughLetters() {\n\n        Completed solution = new Completed();\n\n        assertTrue(solution.canConstruct(\"aa\", \"aab\"));\n    }\n\n    @Test\n    void shouldHandleExactMatch() {\n\n        Completed solution = new Completed();\n\n        assertTrue(solution.canConstruct(\"abc\", \"abc\"));\n    }\n\n    @Test\n    void shouldHandleExtraMagazineLetters() {\n\n        Completed solution = new Completed();\n\n        assertTrue(solution.canConstruct(\"a\", \"aa\"));\n    }\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "is-subsequence",
+  "title": "Is Subsequence",
+  "sourcePath": "30/26_is_subsequence",
+  "hash": "006d46d6d3a66b54505412179d557d7dba3c3bb6d38043f8650e46681383f3ca",
+  "topics": [
+    "Arrays & strings"
+  ],
+  "skillIds": [
+    "scan.invariant"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>26-is-subsequence</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Is Subsequence\n\n## Problem Description\n\nGiven strings `s` and `t`, return whether `s` is a subsequence of `t`.\n\nA subsequence means you can obtain `s` by deleting some (or no) characters from `t` without changing the order of the remaining characters.\n\n## Clarifications\n\n- Characters of `s` must appear in `t` in the same order, not necessarily contiguously.\n- Empty `s` is always a subsequence.\n- This is not about substrings (contiguous); gaps in `t` are allowed.\n\n## Input\n\n- `s`: candidate subsequence\n- `t`: source string\n\n## Output\n\n- `true` if `s` is a subsequence of `t`, else `false`\n\n## Examples\n\n### Example 1\n\nInput:\n\n    s = \"abc\"\n    t = \"ahbgdc\"\n\nOutput:\n\n    true\n\nExplanation:\n\n    Pick a, then b, then c from t in order.\n\n### Example 2\n\nInput:\n\n    s = \"axc\"\n    t = \"ahbgdc\"\n\nOutput:\n\n    false\n\nExplanation:\n\n    a and c exist in order, but x does not appear.\n\n### Example 3\n\nInput:\n\n    s = \"\"\n    t = \"ahbgdc\"\n\nOutput:\n\n    true\n\n### Example 4\n\nInput:\n\n    s = \"abc\"\n    t = \"acb\"\n\nOutput:\n\n    false\n\nExplanation:\n\n    Order in t is a, c, b — cannot get a then b then c.\n\n## Constraints\n\n- 0 <= s.length <= 100\n- 0 <= t.length <= 10,000\n- s and t consist of lowercase English letters\n\n## Follow-up\n\nIf there are many `s` queries against one fixed `t`, can you preprocess `t` to answer faster?\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "class Completed {\n\n    public boolean isSubsequence(String s, String t) {\n\n        int i = 0;\n\n        for (int j = 0; j < t.length() && i < s.length(); j++) {\n\n            if (s.charAt(i) == t.charAt(j)) {\n                i++;\n            }\n        }\n\n        return i == s.length();\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public boolean isSubsequence(String s, String t) {\n\n        return false;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertFalse;\nimport static org.junit.jupiter.api.Assertions.assertTrue;\n\n@DisplayName(\"30/26_is_subsequence (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnTrueForExample1() {\n\n        Solution solution = new Solution();\n\n        assertTrue(solution.isSubsequence(\"abc\", \"ahbgdc\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnFalseForExample2() {\n\n        Solution solution = new Solution();\n\n        assertFalse(solution.isSubsequence(\"axc\", \"ahbgdc\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldAcceptEmptySource() {\n\n        Solution solution = new Solution();\n\n        assertTrue(solution.isSubsequence(\"\", \"ahbgdc\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldRejectWhenTargetEmptyAndSourceNot() {\n\n        Solution solution = new Solution();\n\n        assertFalse(solution.isSubsequence(\"a\", \"\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldAcceptIdenticalStrings() {\n\n        Solution solution = new Solution();\n\n        assertTrue(solution.isSubsequence(\"abc\", \"abc\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldAcceptSingleCharacterMatch() {\n\n        Solution solution = new Solution();\n\n        assertTrue(solution.isSubsequence(\"b\", \"abc\"));\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertFalse;\nimport static org.junit.jupiter.api.Assertions.assertTrue;\n\n@DisplayName(\"30/26_is_subsequence\")\nclass SolutionTest {\n\n    @Test\n    void shouldReturnTrueForExample1() {\n\n        Completed solution = new Completed();\n\n        assertTrue(solution.isSubsequence(\"abc\", \"ahbgdc\"));\n    }\n\n    @Test\n    void shouldReturnFalseForExample2() {\n\n        Completed solution = new Completed();\n\n        assertFalse(solution.isSubsequence(\"axc\", \"ahbgdc\"));\n    }\n\n    @Test\n    void shouldAcceptEmptySource() {\n\n        Completed solution = new Completed();\n\n        assertTrue(solution.isSubsequence(\"\", \"ahbgdc\"));\n    }\n\n    @Test\n    void shouldRejectWhenTargetEmptyAndSourceNot() {\n\n        Completed solution = new Completed();\n\n        assertFalse(solution.isSubsequence(\"a\", \"\"));\n    }\n\n    @Test\n    void shouldAcceptIdenticalStrings() {\n\n        Completed solution = new Completed();\n\n        assertTrue(solution.isSubsequence(\"abc\", \"abc\"));\n    }\n\n    @Test\n    void shouldAcceptSingleCharacterMatch() {\n\n        Completed solution = new Completed();\n\n        assertTrue(solution.isSubsequence(\"b\", \"abc\"));\n    }\n}\n"
+    }
+  ]
+}

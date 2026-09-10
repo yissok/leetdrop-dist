@@ -1,0 +1,38 @@
+{
+  "id": "isomorphic-strings",
+  "title": "Isomorphic Strings",
+  "sourcePath": "40/40_isomorphic_strings",
+  "hash": "40e6ac5dad37a0c454ca5ce39f76a8db739f693510cb3b517ef8056ae6984a0a",
+  "topics": [
+    "Hashing"
+  ],
+  "skillIds": [
+    "hashmap.lookup"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>40-isomorphic-strings</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Isomorphic Strings\n\n## Problem Description\n\nTwo strings `s` and `t` are isomorphic if the characters in `s` can be replaced to get `t`.\n\nAll occurrences of a character must be replaced with the **same** character, while preserving order. No two different characters may map to the same character. A character may map to itself.\n\n## Clarifications\n\n- The mapping must be a **bijection** between the character sets used: one-to-one both ways.\n- Example failure: `s = \"foo\"`, `t = \"bar\"` — first `o` and second `o` would need different images for `a` vs `r`.\n- Example failure: `s = \"paper\"`, `t = \"title\"` is actually true; `s = \"badc\"`, `t = \"baba\"` is false because `c` and `d` cannot both map to `a`/`b` inconsistently (specifically two letters collapsing).\n\n## Input\n\n- `s`, `t`: strings of equal length\n\n## Output\n\n- `true` if isomorphic, else `false`\n\n## Examples\n\n### Example 1\n\nInput:\n\n    s = \"egg\"\n    t = \"add\"\n\nOutput:\n\n    true\n\nExplanation:\n\n    e→a, g→d.\n\n### Example 2\n\nInput:\n\n    s = \"foo\"\n    t = \"bar\"\n\nOutput:\n\n    false\n\nExplanation:\n\n    Both o's must map to the same letter, but a and r differ.\n\n### Example 3\n\nInput:\n\n    s = \"paper\"\n    t = \"title\"\n\nOutput:\n\n    true\n\n### Example 4\n\nInput:\n\n    s = \"badc\"\n    t = \"baba\"\n\nOutput:\n\n    false\n\nExplanation:\n\n    Mapping cannot send both 'c' and 'd' onto letters already used inconsistently; the mapping is not one-to-one.\n\n## Constraints\n\n- 1 <= s.length <= 50,000\n- t.length == s.length\n- s and t consist of any valid ASCII character\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "import java.util.HashMap;\nimport java.util.Map;\n\nclass Completed {\n\n    public boolean isIsomorphic(String s, String t) {\n\n        Map<Character, Character> sToT = new HashMap<>();\n        Map<Character, Character> tToS = new HashMap<>();\n\n        for (int i = 0; i < s.length(); i++) {\n\n            char sc = s.charAt(i);\n            char tc = t.charAt(i);\n\n            if (sToT.containsKey(sc) && sToT.get(sc) != tc) {\n                return false;\n            }\n\n            if (tToS.containsKey(tc) && tToS.get(tc) != sc) {\n                return false;\n            }\n\n            sToT.put(sc, tc);\n            tToS.put(tc, sc);\n        }\n\n        return true;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public boolean isIsomorphic(String s, String t) {\n\n        return false;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertFalse;\nimport static org.junit.jupiter.api.Assertions.assertTrue;\n\n@DisplayName(\"40/40_isomorphic_strings (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldAcceptEggAndAdd() {\n\n        Solution solution = new Solution();\n\n        assertTrue(solution.isIsomorphic(\"egg\", \"add\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldRejectFooAndBar() {\n\n        Solution solution = new Solution();\n\n        assertFalse(solution.isIsomorphic(\"foo\", \"bar\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldAcceptPaperAndTitle() {\n\n        Solution solution = new Solution();\n\n        assertTrue(solution.isIsomorphic(\"paper\", \"title\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldRejectBadMapping() {\n\n        Solution solution = new Solution();\n\n        assertFalse(solution.isIsomorphic(\"badc\", \"baba\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldAcceptIdenticalStrings() {\n\n        Solution solution = new Solution();\n\n        assertTrue(solution.isIsomorphic(\"abc\", \"abc\"));\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertFalse;\nimport static org.junit.jupiter.api.Assertions.assertTrue;\n\n@DisplayName(\"40/40_isomorphic_strings\")\nclass SolutionTest {\n\n    @Test\n    void shouldAcceptEggAndAdd() {\n\n        Completed solution = new Completed();\n\n        assertTrue(solution.isIsomorphic(\"egg\", \"add\"));\n    }\n\n    @Test\n    void shouldRejectFooAndBar() {\n\n        Completed solution = new Completed();\n\n        assertFalse(solution.isIsomorphic(\"foo\", \"bar\"));\n    }\n\n    @Test\n    void shouldAcceptPaperAndTitle() {\n\n        Completed solution = new Completed();\n\n        assertTrue(solution.isIsomorphic(\"paper\", \"title\"));\n    }\n\n    @Test\n    void shouldRejectBadMapping() {\n\n        Completed solution = new Completed();\n\n        assertFalse(solution.isIsomorphic(\"badc\", \"baba\"));\n    }\n\n    @Test\n    void shouldAcceptIdenticalStrings() {\n\n        Completed solution = new Completed();\n\n        assertTrue(solution.isIsomorphic(\"abc\", \"abc\"));\n    }\n}\n"
+    }
+  ]
+}

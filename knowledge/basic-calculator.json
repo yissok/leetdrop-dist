@@ -1,0 +1,38 @@
+{
+  "id": "basic-calculator",
+  "title": "Basic Calculator",
+  "sourcePath": "60/56_basic_calculator",
+  "hash": "fb400e20008f58cce0a008cb61e9acb8bd9283c25b9b938eabb57f93d08cdfaa",
+  "topics": [
+    "Stacks"
+  ],
+  "skillIds": [
+    "java.stack"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>56-basic-calculator</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Basic Calculator\n\n## Problem Description\n\nImplement a basic calculator that evaluates a simple expression string.\n\nThe expression may contain non-negative integers, '+', '-', '(', ')', and spaces. The expression is always valid.\n\nReturn the computed integer result.\n\n## Input / Output\n\n### Input\n\n- A string `s` representing a valid expression\n\n### Output\n\n- The evaluated integer result\n\n## Examples\n\n### Example 1\n\nInput:\n\n    s = \"1 + 1\"\n\nOutput:\n\n    2\n\n### Example 2\n\nInput:\n\n    s = \" 2-1 + 2 \"\n\nOutput:\n\n    3\n\n### Example 3\n\nInput:\n\n    s = \"(1+(4+5+2)-3)+(6+8)\"\n\nOutput:\n\n    23\n\n## Constraints\n\n- 1 <= s.length <= 300,000\n- s consists of digits, '+', '-', '(', ')', and ' '\n- s represents a valid expression\n- '+' is not used as a unary operation\n- '-' can be used as a unary operation, for example \"-1\" and \"(-1)\"\n- There will be no two consecutive operators in the input\n- Every number and running calculation will fit in a signed 32-bit integer\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "import java.util.ArrayDeque;\nimport java.util.Deque;\n\nclass Completed {\n\n    public int calculate(String s) {\n\n        Deque<Integer> signs = new ArrayDeque<>();\n        int result = 0;\n        int number = 0;\n        int sign = 1;\n\n        signs.push(1);\n\n        for (int i = 0; i < s.length(); i++) {\n            char c = s.charAt(i);\n\n            if (Character.isDigit(c)) {\n                number = number * 10 + (c - '0');\n            } else if (c == '+' || c == '-') {\n                result += sign * number;\n                number = 0;\n                sign = signs.peek() * (c == '+' ? 1 : -1);\n            } else if (c == '(') {\n                signs.push(sign);\n            } else if (c == ')') {\n                signs.pop();\n            }\n        }\n\n        result += sign * number;\n        return result;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public int calculate(String s) {\n\n        return 0;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"60/56_basic_calculator (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldAddTwoNumbers() {\n\n        Solution solution = new Solution();\n\n        assertEquals(2, solution.calculate(\"1 + 1\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleMixedPlusAndMinusWithSpaces() {\n\n        Solution solution = new Solution();\n\n        assertEquals(3, solution.calculate(\" 2-1 + 2 \"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldEvaluateNestedParentheses() {\n\n        Solution solution = new Solution();\n\n        assertEquals(23, solution.calculate(\"(1+(4+5+2)-3)+(6+8)\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleUnaryMinus() {\n\n        Solution solution = new Solution();\n\n        assertEquals(-1, solution.calculate(\"-1\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleUnaryMinusInParentheses() {\n\n        Solution solution = new Solution();\n\n        assertEquals(-1, solution.calculate(\"(-1)\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleSingleNumber() {\n\n        Solution solution = new Solution();\n\n        assertEquals(42, solution.calculate(\"42\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleSubtractionOnly() {\n\n        Solution solution = new Solution();\n\n        assertEquals(0, solution.calculate(\"5-5\"));\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"60/56_basic_calculator\")\nclass SolutionTest {\n\n    @Test\n    void shouldAddTwoNumbers() {\n\n        Completed solution = new Completed();\n\n        assertEquals(2, solution.calculate(\"1 + 1\"));\n    }\n\n    @Test\n    void shouldHandleMixedPlusAndMinusWithSpaces() {\n\n        Completed solution = new Completed();\n\n        assertEquals(3, solution.calculate(\" 2-1 + 2 \"));\n    }\n\n    @Test\n    void shouldEvaluateNestedParentheses() {\n\n        Completed solution = new Completed();\n\n        assertEquals(23, solution.calculate(\"(1+(4+5+2)-3)+(6+8)\"));\n    }\n\n    @Test\n    void shouldHandleUnaryMinus() {\n\n        Completed solution = new Completed();\n\n        assertEquals(-1, solution.calculate(\"-1\"));\n    }\n\n    @Test\n    void shouldHandleUnaryMinusInParentheses() {\n\n        Completed solution = new Completed();\n\n        assertEquals(-1, solution.calculate(\"(-1)\"));\n    }\n\n    @Test\n    void shouldHandleSingleNumber() {\n\n        Completed solution = new Completed();\n\n        assertEquals(42, solution.calculate(\"42\"));\n    }\n\n    @Test\n    void shouldHandleSubtractionOnly() {\n\n        Completed solution = new Completed();\n\n        assertEquals(0, solution.calculate(\"5-5\"));\n    }\n}\n"
+    }
+  ]
+}
