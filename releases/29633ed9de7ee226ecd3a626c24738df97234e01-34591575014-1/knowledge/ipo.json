@@ -1,0 +1,40 @@
+{
+  "id": "ipo",
+  "title": "IPO",
+  "sourcePath": "130/122_ipo",
+  "hash": "33bdb33d47e4c2c45d03cf4a200a5a01852ea7da9038e3a944993a791a0c9544",
+  "topics": [
+    "Heaps"
+  ],
+  "skillIds": [
+    "java.comparator",
+    "heap.dynamic-extreme",
+    "greedy.choice"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>122-ipo</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# IPO\n\n## Problem Description\n\nSuppose LeetCode will start its IPO soon. In order to sell a good price of its shares to Venture Capital, LeetCode would like to work on some projects to increase its capital before the IPO.\n\nInitially, LeetCode has `w` capital. It can finish at most `k` distinct projects before the IPO. Doing a project `i` increases capital by `profits[i]`, but requires at least `capital[i]` capital to start.\n\nSince it can only finish at most `k` projects before the IPO, find the maximum capital it can achieve after finishing at most `k` distinct projects.\n\n## Input / Output\n\n### Input\n\n- An integer `k` (max projects)\n- An integer `w` (initial capital)\n- An integer array `profits`\n- An integer array `capital`\n\n### Output\n\n- The maximized capital after at most `k` projects\n\n## Examples\n\n### Example 1\n\nInput:\n\n    k = 2\n    w = 0\n    profits = [1,2,3]\n    capital = [0,1,1]\n\nOutput:\n\n    4\n\n### Example 2\n\nInput:\n\n    k = 3\n    w = 0\n    profits = [1,2,3]\n    capital = [0,1,2]\n\nOutput:\n\n    6\n\n## Constraints\n\n- 1 <= k <= 100,000\n- 0 <= w <= 1,000,000,000\n- n == profits.length\n- n == capital.length\n- 1 <= n <= 100,000\n- 0 <= profits[i] <= 10,000\n- 0 <= capital[i] <= 1,000,000,000\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "import java.util.PriorityQueue;\n\nclass Completed {\n\n    public int findMaximizedCapital(int k, int w, int[] profits, int[] capital) {\n\n        int n = profits.length;\n\n        PriorityQueue<int[]> projectsByCapital = new PriorityQueue<>(\n            (a, b) -> Integer.compare(a[0], b[0])\n        );\n\n        for (int i = 0; i < n; i++) {\n            projectsByCapital.offer(new int[]{capital[i], profits[i]});\n        }\n\n        PriorityQueue<Integer> availableProfits = new PriorityQueue<>(\n            (a, b) -> Integer.compare(b, a)\n        );\n\n        for (int i = 0; i < k; i++) {\n\n            while (!projectsByCapital.isEmpty() && projectsByCapital.peek()[0] <= w) {\n                availableProfits.offer(projectsByCapital.poll()[1]);\n            }\n\n            if (availableProfits.isEmpty()) {\n                break;\n            }\n\n            w += availableProfits.poll();\n        }\n\n        return w;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public int findMaximizedCapital(int k, int w, int[] profits, int[] capital) {\n\n        return 0;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"130/122_ipo (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldMaximizeCapitalExample1() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            4,\n            solution.findMaximizedCapital(2, 0, new int[]{1, 2, 3}, new int[]{0, 1, 1})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldMaximizeCapitalExample2() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            6,\n            solution.findMaximizedCapital(3, 0, new int[]{1, 2, 3}, new int[]{0, 1, 2})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldStopWhenNoAffordableProject() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            0,\n            solution.findMaximizedCapital(1, 0, new int[]{1, 2, 3}, new int[]{1, 1, 2})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleSingleProject() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            11,\n            solution.findMaximizedCapital(1, 10, new int[]{1}, new int[]{10})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldRespectKLimit() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            3,\n            solution.findMaximizedCapital(1, 0, new int[]{1, 2, 3}, new int[]{0, 0, 0})\n        );\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"130/122_ipo\")\nclass SolutionTest {\n\n    @Test\n    void shouldMaximizeCapitalExample1() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            4,\n            solution.findMaximizedCapital(2, 0, new int[]{1, 2, 3}, new int[]{0, 1, 1})\n        );\n    }\n\n    @Test\n    void shouldMaximizeCapitalExample2() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            6,\n            solution.findMaximizedCapital(3, 0, new int[]{1, 2, 3}, new int[]{0, 1, 2})\n        );\n    }\n\n    @Test\n    void shouldStopWhenNoAffordableProject() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            0,\n            solution.findMaximizedCapital(1, 0, new int[]{1, 2, 3}, new int[]{1, 1, 2})\n        );\n    }\n\n    @Test\n    void shouldHandleSingleProject() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            11,\n            solution.findMaximizedCapital(1, 10, new int[]{1}, new int[]{10})\n        );\n    }\n\n    @Test\n    void shouldRespectKLimit() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            3,\n            solution.findMaximizedCapital(1, 0, new int[]{1, 2, 3}, new int[]{0, 0, 0})\n        );\n    }\n}\n"
+    }
+  ]
+}

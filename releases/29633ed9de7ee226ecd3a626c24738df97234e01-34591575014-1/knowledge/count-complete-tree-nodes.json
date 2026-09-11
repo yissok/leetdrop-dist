@@ -1,0 +1,43 @@
+{
+  "id": "count-complete-tree-nodes",
+  "title": "Count Complete Tree Nodes",
+  "sourcePath": "80/80_count_complete_tree_nodes",
+  "hash": "497403cbd6b6ce31791b9b28afce32e47184745d2504abcc67a027821a3e174b",
+  "topics": [
+    "Trees"
+  ],
+  "skillIds": [
+    "tree.dfs-state",
+    "complexity.recursion"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>80-count-complete-tree-nodes</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Count Complete Tree Nodes\n\n## Problem Description\n\nGiven the root of a complete binary tree, return the number of nodes in the tree.\n\nA complete binary tree is a binary tree in which every level, except possibly the last, is completely filled, and all nodes in the last level are as far left as possible.\n\nDesign an algorithm that runs in less than O(n) time complexity.\n\n## Input / Output\n\n### Input\n\n- The root of a complete binary tree\n\n### Output\n\n- The number of nodes in the tree\n\n## Examples\n\n### Example 1\n\nInput:\n\n    root = [1,2,3,4,5,6]\n\nOutput:\n\n    6\n\n### Example 2\n\nInput:\n\n    root = []\n\nOutput:\n\n    0\n\n### Example 3\n\nInput:\n\n    root = [1]\n\nOutput:\n\n    1\n\n## Constraints\n\n- The number of nodes in the tree is in the range [0, 50,000]\n- 0 <= Node.val <= 50,000\n- The tree is guaranteed to be complete\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "class Completed {\n\n    public int countNodes(TreeNode root) {\n\n        if (root == null) {\n            return 0;\n        }\n\n        int leftHeight = height(root.left);\n        int rightHeight = height(root.right);\n\n        if (leftHeight == rightHeight) {\n            return (1 << leftHeight) + countNodes(root.right);\n        }\n\n        return (1 << rightHeight) + countNodes(root.left);\n    }\n\n    private int height(TreeNode node) {\n\n        int height = 0;\n\n        while (node != null) {\n            height++;\n            node = node.left;\n        }\n\n        return height;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public int countNodes(TreeNode root) {\n\n        return 0;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/TreeNode.java",
+      "content": "class TreeNode {\n\n    int val;\n    TreeNode left;\n    TreeNode right;\n\n    TreeNode() {\n    }\n\n    TreeNode(int val) {\n        this.val = val;\n    }\n\n    TreeNode(int val, TreeNode left, TreeNode right) {\n        this.val = val;\n        this.left = left;\n        this.right = right;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"80/80_count_complete_tree_nodes (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldCountCompleteTree() {\n\n        Solution solution = new Solution();\n\n        TreeNode root = new TreeNode(\n            1,\n            new TreeNode(2, new TreeNode(4), new TreeNode(5)),\n            new TreeNode(3, new TreeNode(6), null)\n        );\n\n        assertEquals(6, solution.countNodes(root));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleEmptyTree() {\n\n        Solution solution = new Solution();\n\n        assertEquals(0, solution.countNodes(null));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleSingleNode() {\n\n        Solution solution = new Solution();\n\n        assertEquals(1, solution.countNodes(new TreeNode(1)));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandlePerfectTree() {\n\n        Solution solution = new Solution();\n\n        TreeNode root = new TreeNode(\n            1,\n            new TreeNode(2, new TreeNode(4), new TreeNode(5)),\n            new TreeNode(3, new TreeNode(6), new TreeNode(7))\n        );\n\n        assertEquals(7, solution.countNodes(root));\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"80/80_count_complete_tree_nodes\")\nclass SolutionTest {\n\n    @Test\n    void shouldCountCompleteTree() {\n\n        Completed solution = new Completed();\n\n        TreeNode root = new TreeNode(\n            1,\n            new TreeNode(2, new TreeNode(4), new TreeNode(5)),\n            new TreeNode(3, new TreeNode(6), null)\n        );\n\n        assertEquals(6, solution.countNodes(root));\n    }\n\n    @Test\n    void shouldHandleEmptyTree() {\n\n        Completed solution = new Completed();\n\n        assertEquals(0, solution.countNodes(null));\n    }\n\n    @Test\n    void shouldHandleSingleNode() {\n\n        Completed solution = new Completed();\n\n        assertEquals(1, solution.countNodes(new TreeNode(1)));\n    }\n\n    @Test\n    void shouldHandlePerfectTree() {\n\n        Completed solution = new Completed();\n\n        TreeNode root = new TreeNode(\n            1,\n            new TreeNode(2, new TreeNode(4), new TreeNode(5)),\n            new TreeNode(3, new TreeNode(6), new TreeNode(7))\n        );\n\n        assertEquals(7, solution.countNodes(root));\n    }\n}\n"
+    }
+  ]
+}

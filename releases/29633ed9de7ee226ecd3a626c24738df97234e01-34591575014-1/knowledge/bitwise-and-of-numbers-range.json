@@ -1,0 +1,38 @@
+{
+  "id": "bitwise-and-of-numbers-range",
+  "title": "Bitwise AND of Numbers Range",
+  "sourcePath": "130/130_bitwise_and_of_numbers_range",
+  "hash": "ccfe188e150df4c649168637c0c7af54bf9262a9a186d8ac9280ceef3d9bb867",
+  "topics": [
+    "Bits & math"
+  ],
+  "skillIds": [
+    "bits.state"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>130-bitwise-and-of-numbers-range</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Bitwise AND of Numbers Range\n\n## Problem Description\n\nGiven two integers `left` and `right` that represent the range `[left, right]`, return the bitwise AND of all numbers in this range, inclusive.\n\n## Input / Output\n\n### Input\n\n- An integer `left`\n- An integer `right`\n\n### Output\n\n- The bitwise AND of every integer in `[left, right]`\n\n## Examples\n\n### Example 1\n\nInput:\n\n    left = 5, right = 7\n\nOutput:\n\n    4\n\n### Example 2\n\nInput:\n\n    left = 0, right = 0\n\nOutput:\n\n    0\n\n### Example 3\n\nInput:\n\n    left = 1, right = 2147483647\n\nOutput:\n\n    0\n\n## Constraints\n\n- 0 <= left <= right <= 2^31 - 1\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "class Completed {\n\n    public int rangeBitwiseAnd(int left, int right) {\n\n        int shift = 0;\n\n        while (left != right) {\n\n            left >>= 1;\n            right >>= 1;\n            shift++;\n        }\n\n        return left << shift;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public int rangeBitwiseAnd(int left, int right) {\n\n        return 0;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"130/130_bitwise_and_of_numbers_range (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldAndRangeFiveToSeven() {\n\n        Solution solution = new Solution();\n\n        assertEquals(4, solution.rangeBitwiseAnd(5, 7));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldAndSingleZero() {\n\n        Solution solution = new Solution();\n\n        assertEquals(0, solution.rangeBitwiseAnd(0, 0));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldAndFullPositiveRange() {\n\n        Solution solution = new Solution();\n\n        assertEquals(0, solution.rangeBitwiseAnd(1, Integer.MAX_VALUE));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldAndIdenticalBounds() {\n\n        Solution solution = new Solution();\n\n        assertEquals(12, solution.rangeBitwiseAnd(12, 12));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldAndPowerOfTwoRange() {\n\n        Solution solution = new Solution();\n\n        assertEquals(8, solution.rangeBitwiseAnd(8, 15));\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"130/130_bitwise_and_of_numbers_range\")\nclass SolutionTest {\n\n    @Test\n    void shouldAndRangeFiveToSeven() {\n\n        Completed solution = new Completed();\n\n        assertEquals(4, solution.rangeBitwiseAnd(5, 7));\n    }\n\n    @Test\n    void shouldAndSingleZero() {\n\n        Completed solution = new Completed();\n\n        assertEquals(0, solution.rangeBitwiseAnd(0, 0));\n    }\n\n    @Test\n    void shouldAndFullPositiveRange() {\n\n        Completed solution = new Completed();\n\n        assertEquals(0, solution.rangeBitwiseAnd(1, Integer.MAX_VALUE));\n    }\n\n    @Test\n    void shouldAndIdenticalBounds() {\n\n        Completed solution = new Completed();\n\n        assertEquals(12, solution.rangeBitwiseAnd(12, 12));\n    }\n\n    @Test\n    void shouldAndPowerOfTwoRange() {\n\n        Completed solution = new Completed();\n\n        assertEquals(8, solution.rangeBitwiseAnd(8, 15));\n    }\n}\n"
+    }
+  ]
+}

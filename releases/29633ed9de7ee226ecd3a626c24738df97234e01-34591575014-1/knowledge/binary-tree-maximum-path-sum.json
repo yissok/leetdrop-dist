@@ -1,0 +1,43 @@
+{
+  "id": "binary-tree-maximum-path-sum",
+  "title": "Binary Tree Maximum Path Sum",
+  "sourcePath": "80/78_binary_tree_maximum_path_sum",
+  "hash": "6d86b41a7d526ba6af9e495fecdd692a451ecfd9d6a8b39dbf4bfccf1b0eee09",
+  "topics": [
+    "Trees"
+  ],
+  "skillIds": [
+    "tree.dfs-state",
+    "complexity.recursion"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>78-binary-tree-maximum-path-sum</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Binary Tree Maximum Path Sum\n\n## Problem Description\n\nA path in a binary tree is a sequence of nodes where each pair of adjacent nodes has an edge connecting them. A node may appear in the path at most once, and the path does not need to pass through the root.\n\nThe path sum is the sum of the node values along the path. Given the root of a binary tree, return the maximum path sum of any non-empty path.\n\n## Input / Output\n\n### Input\n\n- The root of a non-empty binary tree\n\n### Output\n\n- The maximum path sum among all possible paths\n\n## Examples\n\n### Example 1\n\nInput:\n\n    root = [1,2,3]\n\nOutput:\n\n    6\n\nExplanation: the path 2 -> 1 -> 3 sums to 6\n\n### Example 2\n\nInput:\n\n    root = [-10,9,20,null,null,15,7]\n\nOutput:\n\n    42\n\nExplanation: the path 15 -> 20 -> 7 sums to 42\n\n## Constraints\n\n- The number of nodes is in the range [1, 30,000]\n- -1000 <= Node.val <= 1000\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "class Completed {\n\n    private int best;\n\n    public int maxPathSum(TreeNode root) {\n\n        best = Integer.MIN_VALUE;\n        gain(root);\n        return best;\n    }\n\n    private int gain(TreeNode node) {\n\n        if (node == null) {\n            return 0;\n        }\n\n        int left = Math.max(0, gain(node.left));\n        int right = Math.max(0, gain(node.right));\n\n        best = Math.max(best, node.val + left + right);\n\n        return node.val + Math.max(left, right);\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public int maxPathSum(TreeNode root) {\n\n        return 0;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/TreeNode.java",
+      "content": "class TreeNode {\n\n    int val;\n    TreeNode left;\n    TreeNode right;\n\n    TreeNode() {\n    }\n\n    TreeNode(int val) {\n        this.val = val;\n    }\n\n    TreeNode(int val, TreeNode left, TreeNode right) {\n        this.val = val;\n        this.left = left;\n        this.right = right;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"80/78_binary_tree_maximum_path_sum (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldFindPathThroughRoot() {\n\n        Solution solution = new Solution();\n\n        TreeNode root = new TreeNode(1, new TreeNode(2), new TreeNode(3));\n\n        assertEquals(6, solution.maxPathSum(root));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldFindPathInSubtree() {\n\n        Solution solution = new Solution();\n\n        TreeNode root = new TreeNode(\n            -10,\n            new TreeNode(9),\n            new TreeNode(20, new TreeNode(15), new TreeNode(7))\n        );\n\n        assertEquals(42, solution.maxPathSum(root));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleSingleNegativeNode() {\n\n        Solution solution = new Solution();\n\n        assertEquals(-3, solution.maxPathSum(new TreeNode(-3)));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldPreferSingleNodeOverNegativeChildren() {\n\n        Solution solution = new Solution();\n\n        TreeNode root = new TreeNode(2, new TreeNode(-1), null);\n\n        assertEquals(2, solution.maxPathSum(root));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleAllNegativeNodes() {\n\n        Solution solution = new Solution();\n\n        TreeNode root = new TreeNode(-2, new TreeNode(-1), new TreeNode(-3));\n\n        assertEquals(-1, solution.maxPathSum(root));\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"80/78_binary_tree_maximum_path_sum\")\nclass SolutionTest {\n\n    @Test\n    void shouldFindPathThroughRoot() {\n\n        Completed solution = new Completed();\n\n        TreeNode root = new TreeNode(1, new TreeNode(2), new TreeNode(3));\n\n        assertEquals(6, solution.maxPathSum(root));\n    }\n\n    @Test\n    void shouldFindPathInSubtree() {\n\n        Completed solution = new Completed();\n\n        TreeNode root = new TreeNode(\n            -10,\n            new TreeNode(9),\n            new TreeNode(20, new TreeNode(15), new TreeNode(7))\n        );\n\n        assertEquals(42, solution.maxPathSum(root));\n    }\n\n    @Test\n    void shouldHandleSingleNegativeNode() {\n\n        Completed solution = new Completed();\n\n        assertEquals(-3, solution.maxPathSum(new TreeNode(-3)));\n    }\n\n    @Test\n    void shouldPreferSingleNodeOverNegativeChildren() {\n\n        Completed solution = new Completed();\n\n        TreeNode root = new TreeNode(2, new TreeNode(-1), null);\n\n        assertEquals(2, solution.maxPathSum(root));\n    }\n\n    @Test\n    void shouldHandleAllNegativeNodes() {\n\n        Completed solution = new Completed();\n\n        TreeNode root = new TreeNode(-2, new TreeNode(-1), new TreeNode(-3));\n\n        assertEquals(-1, solution.maxPathSum(root));\n    }\n}\n"
+    }
+  ]
+}
