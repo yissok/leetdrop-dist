@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 810" fill="none">
+  <title>dropleet</title>
+  <defs>
+    <linearGradient id="top" x1="280" y1="0" x2="550" y2="310" gradientUnits="userSpaceOnUse"><stop stop-color="#FFF0A8"/><stop offset="1" stop-color="#F6D563"/></linearGradient>
+    <linearGradient id="middle" x1="75" y1="355" x2="550" y2="540" gradientUnits="userSpaceOnUse"><stop stop-color="#F8D563"/><stop offset="1" stop-color="#EAB735"/></linearGradient>
+    <linearGradient id="base" x1="0" y1="585" x2="550" y2="810" gradientUnits="userSpaceOnUse"><stop stop-color="#EAB735"/><stop offset="1" stop-color="#CD941B"/></linearGradient>
+  </defs>
+  <path d="M550 0V310H280L550 0Z" fill="url(#top)"/>
+  <path d="M235 355H550V540H75L235 355Z" fill="url(#middle)"/>
+  <path d="M35 585H550V810H135C15 810-40 675 35 585Z" fill="url(#base)"/>
+</svg>
