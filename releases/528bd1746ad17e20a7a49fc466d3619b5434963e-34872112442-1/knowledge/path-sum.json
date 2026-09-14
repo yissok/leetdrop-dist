@@ -1,0 +1,43 @@
+{
+  "id": "path-sum",
+  "title": "Path Sum",
+  "sourcePath": "80/76_path_sum",
+  "hash": "5d26fb5b2ce672cdc32645efe649f76e2ec200b8286c8625c7bf18c71bb9d6c5",
+  "topics": [
+    "Trees"
+  ],
+  "skillIds": [
+    "tree.dfs-state",
+    "complexity.recursion"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>76-path-sum</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Path Sum\n\n## Problem Description\n\nGiven the root of a binary tree and an integer `targetSum`, return whether the tree has a root-to-leaf path such that the sum of the node values along the path equals `targetSum`.\n\nA leaf is a node with no children.\n\n## Input / Output\n\n### Input\n\n- The root of a binary tree\n- An integer `targetSum`\n\n### Output\n\n- `true` if such a root-to-leaf path exists, otherwise `false`\n\n## Examples\n\n### Example 1\n\nInput:\n\n    root = [5,4,8,11,null,13,4,7,2,null,null,null,1]\n    targetSum = 22\n\nOutput:\n\n    true\n\nExplanation: the path 5 -> 4 -> 11 -> 2 sums to 22\n\n### Example 2\n\nInput:\n\n    root = [1,2,3]\n    targetSum = 5\n\nOutput:\n\n    false\n\n### Example 3\n\nInput:\n\n    root = []\n    targetSum = 0\n\nOutput:\n\n    false\n\n## Constraints\n\n- The number of nodes is in the range [0, 5000]\n- -1000 <= Node.val <= 1000\n- -1000 <= targetSum <= 1000\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "class Completed {\n\n    public boolean hasPathSum(TreeNode root, int targetSum) {\n\n        if (root == null) {\n            return false;\n        }\n\n        if (root.left == null && root.right == null) {\n            return root.val == targetSum;\n        }\n\n        int remaining = targetSum - root.val;\n\n        return hasPathSum(root.left, remaining) || hasPathSum(root.right, remaining);\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public boolean hasPathSum(TreeNode root, int targetSum) {\n\n        return false;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/TreeNode.java",
+      "content": "class TreeNode {\n\n    int val;\n    TreeNode left;\n    TreeNode right;\n\n    TreeNode() {\n    }\n\n    TreeNode(int val) {\n        this.val = val;\n    }\n\n    TreeNode(int val, TreeNode left, TreeNode right) {\n        this.val = val;\n        this.left = left;\n        this.right = right;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertFalse;\nimport static org.junit.jupiter.api.Assertions.assertTrue;\n\n@DisplayName(\"80/76_path_sum (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldFindValidPathSum() {\n\n        Solution solution = new Solution();\n\n        TreeNode root = new TreeNode(\n            5,\n            new TreeNode(4, new TreeNode(11, new TreeNode(7), new TreeNode(2)), null),\n            new TreeNode(8, new TreeNode(13), new TreeNode(4, null, new TreeNode(1)))\n        );\n\n        assertTrue(solution.hasPathSum(root, 22));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldRejectWhenNoPathMatches() {\n\n        Solution solution = new Solution();\n\n        TreeNode root = new TreeNode(1, new TreeNode(2), new TreeNode(3));\n\n        assertFalse(solution.hasPathSum(root, 5));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldRejectEmptyTreeEvenForZero() {\n\n        Solution solution = new Solution();\n\n        assertFalse(solution.hasPathSum(null, 0));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldMatchSingleNodeEqualToTarget() {\n\n        Solution solution = new Solution();\n\n        assertTrue(solution.hasPathSum(new TreeNode(1), 1));\n        assertFalse(solution.hasPathSum(new TreeNode(1), 0));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldRequireLeafNotIntermediateNode() {\n\n        Solution solution = new Solution();\n\n        TreeNode root = new TreeNode(1, new TreeNode(2), null);\n\n        assertFalse(solution.hasPathSum(root, 1));\n        assertTrue(solution.hasPathSum(root, 3));\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertFalse;\nimport static org.junit.jupiter.api.Assertions.assertTrue;\n\n@DisplayName(\"80/76_path_sum\")\nclass SolutionTest {\n\n    @Test\n    void shouldFindValidPathSum() {\n\n        Completed solution = new Completed();\n\n        TreeNode root = new TreeNode(\n            5,\n            new TreeNode(4, new TreeNode(11, new TreeNode(7), new TreeNode(2)), null),\n            new TreeNode(8, new TreeNode(13), new TreeNode(4, null, new TreeNode(1)))\n        );\n\n        assertTrue(solution.hasPathSum(root, 22));\n    }\n\n    @Test\n    void shouldRejectWhenNoPathMatches() {\n\n        Completed solution = new Completed();\n\n        TreeNode root = new TreeNode(1, new TreeNode(2), new TreeNode(3));\n\n        assertFalse(solution.hasPathSum(root, 5));\n    }\n\n    @Test\n    void shouldRejectEmptyTreeEvenForZero() {\n\n        Completed solution = new Completed();\n\n        assertFalse(solution.hasPathSum(null, 0));\n    }\n\n    @Test\n    void shouldMatchSingleNodeEqualToTarget() {\n\n        Completed solution = new Completed();\n\n        assertTrue(solution.hasPathSum(new TreeNode(1), 1));\n        assertFalse(solution.hasPathSum(new TreeNode(1), 0));\n    }\n\n    @Test\n    void shouldRequireLeafNotIntermediateNode() {\n\n        Completed solution = new Completed();\n\n        TreeNode root = new TreeNode(1, new TreeNode(2), null);\n\n        assertFalse(solution.hasPathSum(root, 1));\n        assertTrue(solution.hasPathSum(root, 3));\n    }\n}\n"
+    }
+  ]
+}

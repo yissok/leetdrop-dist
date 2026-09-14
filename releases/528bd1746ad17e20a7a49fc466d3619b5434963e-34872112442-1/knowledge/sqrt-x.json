@@ -1,0 +1,40 @@
+{
+  "id": "sqrt-x",
+  "title": "Sqrt(x)",
+  "sourcePath": "140/134_sqrt_x",
+  "hash": "80ada691e5fffc30435bb9ceca79f4ff21d9fe5808aea8c9cf9a14efdb7db068",
+  "topics": [
+    "Binary search",
+    "Bits & math"
+  ],
+  "skillIds": [
+    "binary-search.partition",
+    "math.decomposition"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>134-sqrt-x</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Sqrt(x)\n\n## Problem Description\n\nGiven a non-negative integer `x`, return the square root of `x` rounded down to the nearest integer. The returned integer should be non-negative as well.\n\nYou must not use any built-in exponent function or operator.\n\nFor example, do not use `pow(x, 0.5)` in C++ or `x ** 0.5` in Python.\n\n## Input / Output\n\n### Input\n\n- A non-negative integer `x`\n\n### Output\n\n- The integer square root of `x` (floor)\n\n## Examples\n\n### Example 1\n\nInput:\n\n    x = 4\n\nOutput:\n\n    2\n\n### Example 2\n\nInput:\n\n    x = 8\n\nOutput:\n\n    2\n\nExplanation:\n\n    The square root of 8 is 2.82842..., and since we round it down to the nearest integer, 2 is returned.\n\n## Constraints\n\n- 0 <= x <= 2^31 - 1\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "class Completed {\n\n    public int mySqrt(int x) {\n\n        if (x < 2) {\n            return x;\n        }\n\n        int left = 1;\n        int right = x / 2;\n\n        while (left <= right) {\n\n            int mid = left + (right - left) / 2;\n            long square = (long) mid * mid;\n\n            if (square == x) {\n                return mid;\n            }\n\n            if (square < x) {\n                left = mid + 1;\n            } else {\n                right = mid - 1;\n            }\n        }\n\n        return right;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public int mySqrt(int x) {\n\n        return 0;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"140/134_sqrt_x (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnTwoForFour() {\n\n        Solution solution = new Solution();\n\n        assertEquals(2, solution.mySqrt(4));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldFloorSqrtOfEight() {\n\n        Solution solution = new Solution();\n\n        assertEquals(2, solution.mySqrt(8));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnZeroForZero() {\n\n        Solution solution = new Solution();\n\n        assertEquals(0, solution.mySqrt(0));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnOneForOne() {\n\n        Solution solution = new Solution();\n\n        assertEquals(1, solution.mySqrt(1));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleLargePerfectSquare() {\n\n        Solution solution = new Solution();\n\n        assertEquals(46340, solution.mySqrt(2147395600));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldFloorNearMaxInt() {\n\n        Solution solution = new Solution();\n\n        assertEquals(46340, solution.mySqrt(Integer.MAX_VALUE));\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"140/134_sqrt_x\")\nclass SolutionTest {\n\n    @Test\n    void shouldReturnTwoForFour() {\n\n        Completed solution = new Completed();\n\n        assertEquals(2, solution.mySqrt(4));\n    }\n\n    @Test\n    void shouldFloorSqrtOfEight() {\n\n        Completed solution = new Completed();\n\n        assertEquals(2, solution.mySqrt(8));\n    }\n\n    @Test\n    void shouldReturnZeroForZero() {\n\n        Completed solution = new Completed();\n\n        assertEquals(0, solution.mySqrt(0));\n    }\n\n    @Test\n    void shouldReturnOneForOne() {\n\n        Completed solution = new Completed();\n\n        assertEquals(1, solution.mySqrt(1));\n    }\n\n    @Test\n    void shouldHandleLargePerfectSquare() {\n\n        Completed solution = new Completed();\n\n        assertEquals(46340, solution.mySqrt(2147395600));\n    }\n\n    @Test\n    void shouldFloorNearMaxInt() {\n\n        Completed solution = new Completed();\n\n        assertEquals(46340, solution.mySqrt(Integer.MAX_VALUE));\n    }\n}\n"
+    }
+  ]
+}
