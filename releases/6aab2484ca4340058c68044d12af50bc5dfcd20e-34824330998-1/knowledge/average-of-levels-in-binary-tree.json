@@ -1,0 +1,44 @@
+{
+  "id": "average-of-levels-in-binary-tree",
+  "title": "Average of Levels in Binary Tree",
+  "sourcePath": "90/83_average_of_levels_in_binary_tree",
+  "hash": "80bf11723160c9b51303447059421efc55954056542817ac12fccfbbda584b80",
+  "topics": [
+    "Trees"
+  ],
+  "skillIds": [
+    "tree.bfs-level",
+    "java.tree",
+    "java.queue"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>83-average-of-levels-in-binary-tree</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Average of Levels in Binary Tree\n\n## Problem Description\n\nGiven the root of a binary tree, return the average value of the nodes on each level as a list of doubles, ordered from the root level down to the deepest level.\n\n## Input / Output\n\n### Input\n\n- The root of a binary tree\n\n### Output\n\n- A list of doubles: the average value of nodes at each level\n\n## Examples\n\n### Example 1\n\nInput:\n\n    root = [3,9,20,null,null,15,7]\n\nOutput:\n\n    [3.00000,14.50000,11.00000]\n\n### Example 2\n\nInput:\n\n    root = [3,9,20,15,7]\n\nOutput:\n\n    [3.00000,14.50000,11.00000]\n\n## Constraints\n\n- The number of nodes in the tree is in the range [1, 10,000]\n- -100,000 <= Node.val <= 100,000\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "import java.util.ArrayList;\nimport java.util.LinkedList;\nimport java.util.List;\nimport java.util.Queue;\n\nclass Completed {\n\n    public List<Double> averageOfLevels(TreeNode root) {\n\n        List<Double> result = new ArrayList<>();\n\n        if (root == null) {\n            return result;\n        }\n\n        Queue<TreeNode> queue = new LinkedList<>();\n        queue.offer(root);\n\n        while (!queue.isEmpty()) {\n\n            int size = queue.size();\n            long sum = 0;\n\n            for (int i = 0; i < size; i++) {\n\n                TreeNode node = queue.poll();\n                sum += node.val;\n\n                if (node.left != null) {\n                    queue.offer(node.left);\n                }\n\n                if (node.right != null) {\n                    queue.offer(node.right);\n                }\n            }\n\n            result.add((double) sum / size);\n        }\n\n        return result;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "import java.util.Collections;\nimport java.util.List;\n\nclass Solution {\n\n    public List<Double> averageOfLevels(TreeNode root) {\n\n        return Collections.emptyList();\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/TreeNode.java",
+      "content": "class TreeNode {\n\n    int val;\n    TreeNode left;\n    TreeNode right;\n\n    TreeNode() {\n    }\n\n    TreeNode(int val) {\n        this.val = val;\n    }\n\n    TreeNode(int val, TreeNode left, TreeNode right) {\n        this.val = val;\n        this.left = left;\n        this.right = right;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport java.util.Arrays;\nimport java.util.List;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"90/83_average_of_levels_in_binary_tree (incomplete)\")\nclass SolutionIncompleteTest {\n\n    private static final double DELTA = 1e-5;\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldComputeAveragesForExample1() {\n\n        Solution solution = new Solution();\n\n        TreeNode root = new TreeNode(\n            3,\n            new TreeNode(9),\n            new TreeNode(20, new TreeNode(15), new TreeNode(7))\n        );\n\n        List<Double> result = solution.averageOfLevels(root);\n\n        assertEquals(3, result.size());\n        assertEquals(3.0, result.get(0), DELTA);\n        assertEquals(14.5, result.get(1), DELTA);\n        assertEquals(11.0, result.get(2), DELTA);\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldComputeAveragesWhenBothChildrenOnSecondLevel() {\n\n        Solution solution = new Solution();\n\n        TreeNode root = new TreeNode(\n            3,\n            new TreeNode(9, new TreeNode(15), new TreeNode(7)),\n            new TreeNode(20)\n        );\n\n        List<Double> result = solution.averageOfLevels(root);\n\n        assertEquals(3, result.size());\n        assertEquals(3.0, result.get(0), DELTA);\n        assertEquals(14.5, result.get(1), DELTA);\n        assertEquals(11.0, result.get(2), DELTA);\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnSingleAverageForSingleNode() {\n\n        Solution solution = new Solution();\n\n        List<Double> result = solution.averageOfLevels(new TreeNode(5));\n\n        assertEquals(Arrays.asList(5.0), result);\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleNegativeValues() {\n\n        Solution solution = new Solution();\n\n        TreeNode root = new TreeNode(\n            1,\n            new TreeNode(-2),\n            new TreeNode(3)\n        );\n\n        List<Double> result = solution.averageOfLevels(root);\n\n        assertEquals(2, result.size());\n        assertEquals(1.0, result.get(0), DELTA);\n        assertEquals(0.5, result.get(1), DELTA);\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport java.util.Arrays;\nimport java.util.List;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"90/83_average_of_levels_in_binary_tree\")\nclass SolutionTest {\n\n    private static final double DELTA = 1e-5;\n\n    @Test\n    void shouldComputeAveragesForExample1() {\n\n        Completed solution = new Completed();\n\n        TreeNode root = new TreeNode(\n            3,\n            new TreeNode(9),\n            new TreeNode(20, new TreeNode(15), new TreeNode(7))\n        );\n\n        List<Double> result = solution.averageOfLevels(root);\n\n        assertEquals(3, result.size());\n        assertEquals(3.0, result.get(0), DELTA);\n        assertEquals(14.5, result.get(1), DELTA);\n        assertEquals(11.0, result.get(2), DELTA);\n    }\n\n    @Test\n    void shouldComputeAveragesWhenBothChildrenOnSecondLevel() {\n\n        Completed solution = new Completed();\n\n        TreeNode root = new TreeNode(\n            3,\n            new TreeNode(9, new TreeNode(15), new TreeNode(7)),\n            new TreeNode(20)\n        );\n\n        List<Double> result = solution.averageOfLevels(root);\n\n        assertEquals(3, result.size());\n        assertEquals(3.0, result.get(0), DELTA);\n        assertEquals(14.5, result.get(1), DELTA);\n        assertEquals(11.0, result.get(2), DELTA);\n    }\n\n    @Test\n    void shouldReturnSingleAverageForSingleNode() {\n\n        Completed solution = new Completed();\n\n        List<Double> result = solution.averageOfLevels(new TreeNode(5));\n\n        assertEquals(Arrays.asList(5.0), result);\n    }\n\n    @Test\n    void shouldHandleNegativeValues() {\n\n        Completed solution = new Completed();\n\n        TreeNode root = new TreeNode(\n            1,\n            new TreeNode(-2),\n            new TreeNode(3)\n        );\n\n        List<Double> result = solution.averageOfLevels(root);\n\n        assertEquals(2, result.size());\n        assertEquals(1.0, result.get(0), DELTA);\n        assertEquals(0.5, result.get(1), DELTA);\n    }\n}\n"
+    }
+  ]
+}

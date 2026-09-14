@@ -1,0 +1,38 @@
+{
+  "id": "spiral-matrix",
+  "title": "Spiral Matrix",
+  "sourcePath": "40/35_spiral_matrix",
+  "hash": "b255273fa43eb57835c9ba0ea008fc5be573279e0a2f5bafa31d211e5acff45d",
+  "topics": [
+    "Matrices"
+  ],
+  "skillIds": [
+    "matrix.state"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>35-spiral-matrix</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Spiral Matrix\n\n## Problem Description\n\nGiven an `m x n` matrix, return all elements in spiral order (clockwise, starting at the top-left).\n\n## Clarifications\n\n- Order: right across the first row, down the last column, left across the bottom row, up the first column, then inward, and so on.\n- Works for non-square matrices.\n- A 1-row or 1-column matrix is just that line in order.\n\n## Input\n\n- `matrix`: 2D integer array\n\n## Output\n\n- List of elements in spiral order\n\n## Examples\n\n### Example 1\n\nInput:\n\n    matrix = [[1,2,3],[4,5,6],[7,8,9]]\n\nOutput:\n\n    [1,2,3,6,9,8,7,4,5]\n\n### Example 2\n\nInput:\n\n    matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]\n\nOutput:\n\n    [1,2,3,4,8,12,11,10,9,5,6,7]\n\n### Example 3\n\nInput:\n\n    matrix = [[1]]\n\nOutput:\n\n    [1]\n\n### Example 4\n\nInput:\n\n    matrix = [[1],[2],[3]]\n\nOutput:\n\n    [1,2,3]\n\n## Constraints\n\n- m == matrix.length\n- n == matrix[i].length\n- 1 <= m, n <= 10\n- -100 <= matrix[i][j] <= 100\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "import java.util.ArrayList;\nimport java.util.List;\n\nclass Completed {\n\n    public List<Integer> spiralOrder(int[][] matrix) {\n\n        List<Integer> result = new ArrayList<>();\n\n        int top = 0;\n        int bottom = matrix.length - 1;\n        int left = 0;\n        int right = matrix[0].length - 1;\n\n        while (top <= bottom && left <= right) {\n\n            for (int col = left; col <= right; col++) {\n                result.add(matrix[top][col]);\n            }\n            top++;\n\n            for (int row = top; row <= bottom; row++) {\n                result.add(matrix[row][right]);\n            }\n            right--;\n\n            if (top <= bottom) {\n\n                for (int col = right; col >= left; col--) {\n                    result.add(matrix[bottom][col]);\n                }\n                bottom--;\n            }\n\n            if (left <= right) {\n\n                for (int row = bottom; row >= top; row--) {\n                    result.add(matrix[row][left]);\n                }\n                left++;\n            }\n        }\n\n        return result;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "import java.util.List;\n\nclass Solution {\n\n    public List<Integer> spiralOrder(int[][] matrix) {\n\n        return null;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport java.util.Arrays;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"40/35_spiral_matrix (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldTraverseSquareMatrix() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            Arrays.asList(1, 2, 3, 6, 9, 8, 7, 4, 5),\n            solution.spiralOrder(new int[][]{\n                {1, 2, 3},\n                {4, 5, 6},\n                {7, 8, 9}\n            })\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldTraverseRectangularMatrix() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            Arrays.asList(1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7),\n            solution.spiralOrder(new int[][]{\n                {1, 2, 3, 4},\n                {5, 6, 7, 8},\n                {9, 10, 11, 12}\n            })\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleSingleElement() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            Arrays.asList(1),\n            solution.spiralOrder(new int[][]{{1}})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleSingleRow() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            Arrays.asList(1, 2, 3),\n            solution.spiralOrder(new int[][]{{1, 2, 3}})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleSingleColumn() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            Arrays.asList(1, 2, 3),\n            solution.spiralOrder(new int[][]{{1}, {2}, {3}})\n        );\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport java.util.Arrays;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"40/35_spiral_matrix\")\nclass SolutionTest {\n\n    @Test\n    void shouldTraverseSquareMatrix() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            Arrays.asList(1, 2, 3, 6, 9, 8, 7, 4, 5),\n            solution.spiralOrder(new int[][]{\n                {1, 2, 3},\n                {4, 5, 6},\n                {7, 8, 9}\n            })\n        );\n    }\n\n    @Test\n    void shouldTraverseRectangularMatrix() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            Arrays.asList(1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7),\n            solution.spiralOrder(new int[][]{\n                {1, 2, 3, 4},\n                {5, 6, 7, 8},\n                {9, 10, 11, 12}\n            })\n        );\n    }\n\n    @Test\n    void shouldHandleSingleElement() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            Arrays.asList(1),\n            solution.spiralOrder(new int[][]{{1}})\n        );\n    }\n\n    @Test\n    void shouldHandleSingleRow() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            Arrays.asList(1, 2, 3),\n            solution.spiralOrder(new int[][]{{1, 2, 3}})\n        );\n    }\n\n    @Test\n    void shouldHandleSingleColumn() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            Arrays.asList(1, 2, 3),\n            solution.spiralOrder(new int[][]{{1}, {2}, {3}})\n        );\n    }\n}\n"
+    }
+  ]
+}

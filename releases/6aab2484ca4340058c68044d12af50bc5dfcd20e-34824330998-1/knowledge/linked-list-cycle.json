@@ -1,0 +1,42 @@
+{
+  "id": "linked-list-cycle",
+  "title": "Linked List Cycle",
+  "sourcePath": "60/57_linked_list_cycle",
+  "hash": "54205b44b63b12e9191e430ea027eb146086adc3444142b6b5ddb7a44a19ad70",
+  "topics": [
+    "Linked lists"
+  ],
+  "skillIds": [
+    "two-pointers.fast-slow"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>57-linked-list-cycle</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Linked List Cycle\n\n## Problem Description\n\nGiven the head of a linked list, determine whether the list contains a cycle.\n\nA cycle exists if some node can be reached again by continuously following the next pointer. Internally, a cycle may be described by an index pos where the tail connects to the node at that index. If pos is -1, there is no cycle.\n\nReturn true if there is a cycle in the linked list. Otherwise, return false.\n\n## Input / Output\n\n### Input\n\n- The head of a singly linked list\n- A cycle position indicator used only for building test cases\n\n### Output\n\n- `true` if a cycle exists, otherwise `false`\n\n## Examples\n\n### Example 1\n\nInput:\n\n    head = [3,2,0,-4], pos = 1\n\nOutput:\n\n    true\n\nExplanation:\n\n    The tail connects back to the node with value 2.\n\n### Example 2\n\nInput:\n\n    head = [1,2], pos = 0\n\nOutput:\n\n    true\n\n### Example 3\n\nInput:\n\n    head = [1], pos = -1\n\nOutput:\n\n    false\n\n## Constraints\n\n- The number of nodes is in the range [0, 10,000]\n- -100,000 <= Node.val <= 100,000\n- pos is -1 or a valid index in the linked list\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "class Completed {\n\n    public boolean hasCycle(ListNode head) {\n\n        if (head == null || head.next == null) {\n            return false;\n        }\n\n        ListNode slow = head;\n        ListNode fast = head;\n\n        while (fast != null && fast.next != null) {\n            slow = slow.next;\n            fast = fast.next.next;\n\n            if (slow == fast) {\n                return true;\n            }\n        }\n\n        return false;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/ListNode.java",
+      "content": "class ListNode {\n\n    int val;\n    ListNode next;\n\n    ListNode() {\n    }\n\n    ListNode(int val) {\n        this.val = val;\n    }\n\n    ListNode(int val, ListNode next) {\n        this.val = val;\n        this.next = next;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public boolean hasCycle(ListNode head) {\n\n        return false;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertFalse;\nimport static org.junit.jupiter.api.Assertions.assertTrue;\n\n@DisplayName(\"60/57_linked_list_cycle (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldDetectCycleConnectingToMiddle() {\n\n        Solution solution = new Solution();\n        ListNode head = buildList(new int[]{3, 2, 0, -4}, 1);\n\n        assertTrue(solution.hasCycle(head));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldDetectCycleConnectingToHead() {\n\n        Solution solution = new Solution();\n        ListNode head = buildList(new int[]{1, 2}, 0);\n\n        assertTrue(solution.hasCycle(head));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnFalseWhenNoCycle() {\n\n        Solution solution = new Solution();\n        ListNode head = buildList(new int[]{1}, -1);\n\n        assertFalse(solution.hasCycle(head));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnFalseForEmptyList() {\n\n        Solution solution = new Solution();\n\n        assertFalse(solution.hasCycle(null));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnFalseForAcyclicLongerList() {\n\n        Solution solution = new Solution();\n        ListNode head = buildList(new int[]{1, 2, 3, 4}, -1);\n\n        assertFalse(solution.hasCycle(head));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldDetectSelfLoop() {\n\n        Solution solution = new Solution();\n        ListNode head = buildList(new int[]{1}, 0);\n\n        assertTrue(solution.hasCycle(head));\n    }\n\n    private ListNode buildList(int[] values, int pos) {\n\n        if (values.length == 0) {\n            return null;\n        }\n\n        ListNode[] nodes = new ListNode[values.length];\n\n        for (int i = 0; i < values.length; i++) {\n            nodes[i] = new ListNode(values[i]);\n        }\n\n        for (int i = 0; i < values.length - 1; i++) {\n            nodes[i].next = nodes[i + 1];\n        }\n\n        if (pos >= 0) {\n            nodes[values.length - 1].next = nodes[pos];\n        }\n\n        return nodes[0];\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertFalse;\nimport static org.junit.jupiter.api.Assertions.assertTrue;\n\n@DisplayName(\"60/57_linked_list_cycle\")\nclass SolutionTest {\n\n    @Test\n    void shouldDetectCycleConnectingToMiddle() {\n\n        Completed solution = new Completed();\n        ListNode head = buildList(new int[]{3, 2, 0, -4}, 1);\n\n        assertTrue(solution.hasCycle(head));\n    }\n\n    @Test\n    void shouldDetectCycleConnectingToHead() {\n\n        Completed solution = new Completed();\n        ListNode head = buildList(new int[]{1, 2}, 0);\n\n        assertTrue(solution.hasCycle(head));\n    }\n\n    @Test\n    void shouldReturnFalseWhenNoCycle() {\n\n        Completed solution = new Completed();\n        ListNode head = buildList(new int[]{1}, -1);\n\n        assertFalse(solution.hasCycle(head));\n    }\n\n    @Test\n    void shouldReturnFalseForEmptyList() {\n\n        Completed solution = new Completed();\n\n        assertFalse(solution.hasCycle(null));\n    }\n\n    @Test\n    void shouldReturnFalseForAcyclicLongerList() {\n\n        Completed solution = new Completed();\n        ListNode head = buildList(new int[]{1, 2, 3, 4}, -1);\n\n        assertFalse(solution.hasCycle(head));\n    }\n\n    @Test\n    void shouldDetectSelfLoop() {\n\n        Completed solution = new Completed();\n        ListNode head = buildList(new int[]{1}, 0);\n\n        assertTrue(solution.hasCycle(head));\n    }\n\n    private ListNode buildList(int[] values, int pos) {\n\n        if (values.length == 0) {\n            return null;\n        }\n\n        ListNode[] nodes = new ListNode[values.length];\n\n        for (int i = 0; i < values.length; i++) {\n            nodes[i] = new ListNode(values[i]);\n        }\n\n        for (int i = 0; i < values.length - 1; i++) {\n            nodes[i].next = nodes[i + 1];\n        }\n\n        if (pos >= 0) {\n            nodes[values.length - 1].next = nodes[pos];\n        }\n\n        return nodes[0];\n    }\n}\n"
+    }
+  ]
+}

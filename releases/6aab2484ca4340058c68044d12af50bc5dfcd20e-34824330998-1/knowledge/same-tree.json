@@ -1,0 +1,43 @@
+{
+  "id": "same-tree",
+  "title": "Same Tree",
+  "sourcePath": "70/69_same_tree",
+  "hash": "14bb302b54cad19316ced6c0f16a3bcbb9469d79c5b2f39fb0ced7ff0316dda9",
+  "topics": [
+    "Trees"
+  ],
+  "skillIds": [
+    "tree.dfs-state",
+    "complexity.recursion"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>69-same-tree</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Same Tree\n\n## Problem Description\n\nGiven the roots of two binary trees `p` and `q`, write a function to check whether they are the same.\n\nTwo binary trees are considered the same if they are structurally identical and the nodes have the same values.\n\n## Input / Output\n\n### Input\n\n- Roots of two binary trees `p` and `q`\n\n### Output\n\n- `true` if the trees are the same\n- `false` otherwise\n\n## Examples\n\n### Example 1\n\nInput:\n\n    p = [1,2,3]\n    q = [1,2,3]\n\nOutput:\n\n    true\n\n### Example 2\n\nInput:\n\n    p = [1,2]\n    q = [1,null,2]\n\nOutput:\n\n    false\n\n### Example 3\n\nInput:\n\n    p = [1,2,1]\n    q = [1,1,2]\n\nOutput:\n\n    false\n\n## Constraints\n\n- The number of nodes in both trees is in the range [0, 100]\n- -10,000 <= Node.val <= 10,000\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "class Completed {\n\n    public boolean isSameTree(TreeNode p, TreeNode q) {\n\n        if (p == null && q == null) {\n            return true;\n        }\n\n        if (p == null || q == null || p.val != q.val) {\n            return false;\n        }\n\n        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public boolean isSameTree(TreeNode p, TreeNode q) {\n\n        return false;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/TreeNode.java",
+      "content": "class TreeNode {\n\n    int val;\n    TreeNode left;\n    TreeNode right;\n\n    TreeNode() {\n    }\n\n    TreeNode(int val) {\n        this.val = val;\n    }\n\n    TreeNode(int val, TreeNode left, TreeNode right) {\n        this.val = val;\n        this.left = left;\n        this.right = right;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertFalse;\nimport static org.junit.jupiter.api.Assertions.assertTrue;\n\n@DisplayName(\"70/69_same_tree (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldAcceptIdenticalTrees() {\n\n        Solution solution = new Solution();\n\n        TreeNode p = new TreeNode(1, new TreeNode(2), new TreeNode(3));\n        TreeNode q = new TreeNode(1, new TreeNode(2), new TreeNode(3));\n\n        assertTrue(solution.isSameTree(p, q));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldRejectDifferentStructure() {\n\n        Solution solution = new Solution();\n\n        TreeNode p = new TreeNode(1, new TreeNode(2), null);\n        TreeNode q = new TreeNode(1, null, new TreeNode(2));\n\n        assertFalse(solution.isSameTree(p, q));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldRejectDifferentValues() {\n\n        Solution solution = new Solution();\n\n        TreeNode p = new TreeNode(1, new TreeNode(2), new TreeNode(1));\n        TreeNode q = new TreeNode(1, new TreeNode(1), new TreeNode(2));\n\n        assertFalse(solution.isSameTree(p, q));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldAcceptTwoEmptyTrees() {\n\n        Solution solution = new Solution();\n\n        assertTrue(solution.isSameTree(null, null));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldRejectOneEmptyTree() {\n\n        Solution solution = new Solution();\n\n        assertFalse(solution.isSameTree(new TreeNode(1), null));\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertFalse;\nimport static org.junit.jupiter.api.Assertions.assertTrue;\n\n@DisplayName(\"70/69_same_tree\")\nclass SolutionTest {\n\n    @Test\n    void shouldAcceptIdenticalTrees() {\n\n        Completed solution = new Completed();\n\n        TreeNode p = new TreeNode(1, new TreeNode(2), new TreeNode(3));\n        TreeNode q = new TreeNode(1, new TreeNode(2), new TreeNode(3));\n\n        assertTrue(solution.isSameTree(p, q));\n    }\n\n    @Test\n    void shouldRejectDifferentStructure() {\n\n        Completed solution = new Completed();\n\n        TreeNode p = new TreeNode(1, new TreeNode(2), null);\n        TreeNode q = new TreeNode(1, null, new TreeNode(2));\n\n        assertFalse(solution.isSameTree(p, q));\n    }\n\n    @Test\n    void shouldRejectDifferentValues() {\n\n        Completed solution = new Completed();\n\n        TreeNode p = new TreeNode(1, new TreeNode(2), new TreeNode(1));\n        TreeNode q = new TreeNode(1, new TreeNode(1), new TreeNode(2));\n\n        assertFalse(solution.isSameTree(p, q));\n    }\n\n    @Test\n    void shouldAcceptTwoEmptyTrees() {\n\n        Completed solution = new Completed();\n\n        assertTrue(solution.isSameTree(null, null));\n    }\n\n    @Test\n    void shouldRejectOneEmptyTree() {\n\n        Completed solution = new Completed();\n\n        assertFalse(solution.isSameTree(new TreeNode(1), null));\n    }\n}\n"
+    }
+  ]
+}

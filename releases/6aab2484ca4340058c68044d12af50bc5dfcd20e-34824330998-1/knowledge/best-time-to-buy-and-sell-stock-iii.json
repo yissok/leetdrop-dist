@@ -1,0 +1,39 @@
+{
+  "id": "best-time-to-buy-and-sell-stock-iii",
+  "title": "Best Time to Buy and Sell Stock III",
+  "sourcePath": "150/148_best_time_to_buy_and_sell_stock_iii",
+  "hash": "cb98644fae4ee6666a053bb475c6df20006c3f2dfbe7a4f4791d11bdc8b2e0db",
+  "topics": [
+    "Dynamic programming"
+  ],
+  "skillIds": [
+    "dp.state",
+    "complexity.dp-space"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>148-best-time-to-buy-and-sell-stock-iii</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Best Time to Buy and Sell Stock III\n\n## Problem Description\n\nYou are given an array where each value represents the price of a stock on a given day.\n\nFind the maximum profit you can achieve. You may complete at most two transactions.\n\nYou must sell the stock before you buy again. That is, you may not hold more than one share at a time.\n\n## Input / Output\n\n### Input\n\n- An integer array `prices` where `prices[i]` is the stock price on day `i`\n\n### Output\n\n- The maximum profit achievable with at most two transactions\n- Return 0 if no profit is possible\n\n## Examples\n\n### Example 1\n\nInput:\n\n    prices = [3,3,5,0,0,3,1,4]\n\nOutput:\n\n    6\n\nExplanation:\n\nBuy on day 4 at price 0 and sell on day 6 at price 3. Buy on day 7 at price 1 and sell on day 8 at price 4.\n\n### Example 2\n\nInput:\n\n    prices = [1,2,3,4,5]\n\nOutput:\n\n    4\n\nExplanation:\n\nBuy on day 1 at price 1 and sell on day 5 at price 5. A second transaction is not needed.\n\n### Example 3\n\nInput:\n\n    prices = [7,6,4,3,1]\n\nOutput:\n\n    0\n\n## Constraints\n\n- 1 <= prices.length <= 100,000\n- 0 <= prices[i] <= 100,000\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "class Completed {\n\n    public int maxProfit(int[] prices) {\n\n        int buy1 = Integer.MIN_VALUE;\n        int sell1 = 0;\n        int buy2 = Integer.MIN_VALUE;\n        int sell2 = 0;\n\n        for (int price : prices) {\n\n            buy1 = Math.max(buy1, -price);\n            sell1 = Math.max(sell1, buy1 + price);\n            buy2 = Math.max(buy2, sell1 - price);\n            sell2 = Math.max(sell2, buy2 + price);\n        }\n\n        return sell2;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public int maxProfit(int[] prices) {\n\n        return 0;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"150/148_best_time_to_buy_and_sell_stock_iii (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnMaxProfitForExample1() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            6,\n            solution.maxProfit(new int[]{3, 3, 5, 0, 0, 3, 1, 4})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnMaxProfitForExample2() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            4,\n            solution.maxProfit(new int[]{1, 2, 3, 4, 5})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnZeroWhenPricesOnlyDecrease() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            0,\n            solution.maxProfit(new int[]{7, 6, 4, 3, 1})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleSingleDay() {\n\n        Solution solution = new Solution();\n\n        assertEquals(0, solution.maxProfit(new int[]{5}));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleTwoDaysWithProfit() {\n\n        Solution solution = new Solution();\n\n        assertEquals(2, solution.maxProfit(new int[]{1, 3}));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldUseAtMostTwoTransactions() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            7,\n            solution.maxProfit(new int[]{1, 4, 2, 6})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleFlatPrices() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            0,\n            solution.maxProfit(new int[]{2, 2, 2, 2})\n        );\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"150/148_best_time_to_buy_and_sell_stock_iii\")\nclass SolutionTest {\n\n    @Test\n    void shouldReturnMaxProfitForExample1() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            6,\n            solution.maxProfit(new int[]{3, 3, 5, 0, 0, 3, 1, 4})\n        );\n    }\n\n    @Test\n    void shouldReturnMaxProfitForExample2() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            4,\n            solution.maxProfit(new int[]{1, 2, 3, 4, 5})\n        );\n    }\n\n    @Test\n    void shouldReturnZeroWhenPricesOnlyDecrease() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            0,\n            solution.maxProfit(new int[]{7, 6, 4, 3, 1})\n        );\n    }\n\n    @Test\n    void shouldHandleSingleDay() {\n\n        Completed solution = new Completed();\n\n        assertEquals(0, solution.maxProfit(new int[]{5}));\n    }\n\n    @Test\n    void shouldHandleTwoDaysWithProfit() {\n\n        Completed solution = new Completed();\n\n        assertEquals(2, solution.maxProfit(new int[]{1, 3}));\n    }\n\n    @Test\n    void shouldUseAtMostTwoTransactions() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            7,\n            solution.maxProfit(new int[]{1, 4, 2, 6})\n        );\n    }\n\n    @Test\n    void shouldHandleFlatPrices() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            0,\n            solution.maxProfit(new int[]{2, 2, 2, 2})\n        );\n    }\n}\n"
+    }
+  ]
+}
