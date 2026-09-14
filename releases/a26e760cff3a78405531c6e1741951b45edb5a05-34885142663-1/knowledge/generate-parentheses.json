@@ -1,0 +1,38 @@
+{
+  "id": "generate-parentheses",
+  "title": "Generate Parentheses",
+  "sourcePath": "110/106_generate_parentheses",
+  "hash": "d09221c519d42ffa8a2280eabd9e8f273f8564f51d01db21097fe4188c5afef3",
+  "topics": [
+    "Backtracking"
+  ],
+  "skillIds": [
+    "backtracking.undo"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>106-generate-parentheses</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Generate Parentheses\n\n## Problem Description\n\nGiven `n` pairs of parentheses, write a function to generate all combinations of well-formed parentheses.\n\n## Input / Output\n\n### Input\n\n- An integer `n` representing the number of pairs\n\n### Output\n\n- All combinations of well-formed parentheses\n- The answer may be returned in any order\n\n## Examples\n\n### Example 1\n\nInput:\n\n    n = 3\n\nOutput:\n\n    [\"((()))\",\"(()())\",\"(())()\",\"()(())\",\"()()()\"]\n\n### Example 2\n\nInput:\n\n    n = 1\n\nOutput:\n\n    [\"()\"]\n\n## Constraints\n\n- 1 <= n <= 8\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "import java.util.ArrayList;\nimport java.util.List;\n\nclass Completed {\n\n    public List<String> generateParenthesis(int n) {\n\n        List<String> result = new ArrayList<>();\n        backtrack(n, 0, 0, new StringBuilder(), result);\n        return result;\n    }\n\n    private void backtrack(\n        int n,\n        int open,\n        int close,\n        StringBuilder current,\n        List<String> result\n    ) {\n\n        if (current.length() == n * 2) {\n            result.add(current.toString());\n            return;\n        }\n\n        if (open < n) {\n            current.append('(');\n            backtrack(n, open + 1, close, current, result);\n            current.deleteCharAt(current.length() - 1);\n        }\n\n        if (close < open) {\n            current.append(')');\n            backtrack(n, open, close + 1, current, result);\n            current.deleteCharAt(current.length() - 1);\n        }\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "import java.util.List;\n\nclass Solution {\n\n    public List<String> generateParenthesis(int n) {\n\n        return null;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport java.util.Arrays;\nimport java.util.HashSet;\nimport java.util.List;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"110/106_generate_parentheses (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldGenerateAllValidForThreePairs() {\n\n        Solution solution = new Solution();\n\n        List<String> result = solution.generateParenthesis(3);\n\n        assertEquals(\n            new HashSet<>(Arrays.asList(\n                \"((()))\",\n                \"(()())\",\n                \"(())()\",\n                \"()(())\",\n                \"()()()\"\n            )),\n            new HashSet<>(result)\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldGenerateSinglePair() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            Arrays.asList(\"()\"),\n            solution.generateParenthesis(1)\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldGenerateAllValidForTwoPairs() {\n\n        Solution solution = new Solution();\n\n        List<String> result = solution.generateParenthesis(2);\n\n        assertEquals(\n            new HashSet<>(Arrays.asList(\"(())\", \"()()\")),\n            new HashSet<>(result)\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHaveCorrectCountForFourPairs() {\n\n        Solution solution = new Solution();\n\n        assertEquals(14, solution.generateParenthesis(4).size());\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport java.util.Arrays;\nimport java.util.HashSet;\nimport java.util.List;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"110/106_generate_parentheses\")\nclass SolutionTest {\n\n    @Test\n    void shouldGenerateAllValidForThreePairs() {\n\n        Completed solution = new Completed();\n\n        List<String> result = solution.generateParenthesis(3);\n\n        assertEquals(\n            new HashSet<>(Arrays.asList(\n                \"((()))\",\n                \"(()())\",\n                \"(())()\",\n                \"()(())\",\n                \"()()()\"\n            )),\n            new HashSet<>(result)\n        );\n    }\n\n    @Test\n    void shouldGenerateSinglePair() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            Arrays.asList(\"()\"),\n            solution.generateParenthesis(1)\n        );\n    }\n\n    @Test\n    void shouldGenerateAllValidForTwoPairs() {\n\n        Completed solution = new Completed();\n\n        List<String> result = solution.generateParenthesis(2);\n\n        assertEquals(\n            new HashSet<>(Arrays.asList(\"(())\", \"()()\")),\n            new HashSet<>(result)\n        );\n    }\n\n    @Test\n    void shouldHaveCorrectCountForFourPairs() {\n\n        Completed solution = new Completed();\n\n        assertEquals(14, solution.generateParenthesis(4).size());\n    }\n}\n"
+    }
+  ]
+}

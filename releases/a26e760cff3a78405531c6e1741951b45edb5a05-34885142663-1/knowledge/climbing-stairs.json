@@ -1,0 +1,40 @@
+{
+  "id": "climbing-stairs",
+  "title": "Climbing Stairs",
+  "sourcePath": "140/137_climbing_stairs",
+  "hash": "7d8f2356a70535e4da0880051a5c67c0666010606c76fc67a65967fd90c3a2ff",
+  "topics": [
+    "Dynamic programming"
+  ],
+  "skillIds": [
+    "dp.state",
+    "dp.transition",
+    "complexity.dp-space"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>137-climbing-stairs</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Climbing Stairs\n\n## Problem Description\n\nYou are climbing a staircase. It takes `n` steps to reach the top.\n\nEach time you can either climb `1` or `2` steps. In how many distinct ways can you climb to the top?\n\n## Input / Output\n\n### Input\n\n- An integer `n`\n\n### Output\n\n- The number of distinct ways to climb to the top\n\n## Examples\n\n### Example 1\n\nInput:\n\n    n = 2\n\nOutput:\n\n    2\n\nExplanation:\n\n    1. 1 step + 1 step\n    2. 2 steps\n\n### Example 2\n\nInput:\n\n    n = 3\n\nOutput:\n\n    3\n\nExplanation:\n\n    1. 1 step + 1 step + 1 step\n    2. 1 step + 2 steps\n    3. 2 steps + 1 step\n\n## Constraints\n\n- 1 <= n <= 45\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "class Completed {\n\n    public int climbStairs(int n) {\n\n        if (n <= 2) {\n            return n;\n        }\n\n        int prev2 = 1;\n        int prev1 = 2;\n\n        for (int i = 3; i <= n; i++) {\n\n            int current = prev1 + prev2;\n            prev2 = prev1;\n            prev1 = current;\n        }\n\n        return prev1;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public int climbStairs(int n) {\n\n        return 0;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"140/137_climbing_stairs (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnTwoWaysForTwoSteps() {\n\n        Solution solution = new Solution();\n\n        assertEquals(2, solution.climbStairs(2));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnThreeWaysForThreeSteps() {\n\n        Solution solution = new Solution();\n\n        assertEquals(3, solution.climbStairs(3));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnOneWayForOneStep() {\n\n        Solution solution = new Solution();\n\n        assertEquals(1, solution.climbStairs(1));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnFiveWaysForFourSteps() {\n\n        Solution solution = new Solution();\n\n        assertEquals(5, solution.climbStairs(4));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleUpperConstraint() {\n\n        Solution solution = new Solution();\n\n        assertEquals(1836311903, solution.climbStairs(45));\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"140/137_climbing_stairs\")\nclass SolutionTest {\n\n    @Test\n    void shouldReturnTwoWaysForTwoSteps() {\n\n        Completed solution = new Completed();\n\n        assertEquals(2, solution.climbStairs(2));\n    }\n\n    @Test\n    void shouldReturnThreeWaysForThreeSteps() {\n\n        Completed solution = new Completed();\n\n        assertEquals(3, solution.climbStairs(3));\n    }\n\n    @Test\n    void shouldReturnOneWayForOneStep() {\n\n        Completed solution = new Completed();\n\n        assertEquals(1, solution.climbStairs(1));\n    }\n\n    @Test\n    void shouldReturnFiveWaysForFourSteps() {\n\n        Completed solution = new Completed();\n\n        assertEquals(5, solution.climbStairs(4));\n    }\n\n    @Test\n    void shouldHandleUpperConstraint() {\n\n        Completed solution = new Completed();\n\n        assertEquals(1836311903, solution.climbStairs(45));\n    }\n}\n"
+    }
+  ]
+}

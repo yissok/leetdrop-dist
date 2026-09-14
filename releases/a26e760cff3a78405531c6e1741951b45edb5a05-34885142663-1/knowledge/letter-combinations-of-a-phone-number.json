@@ -1,0 +1,38 @@
+{
+  "id": "letter-combinations-of-a-phone-number",
+  "title": "Letter Combinations of a Phone Number",
+  "sourcePath": "110/101_letter_combinations_of_a_phone_number",
+  "hash": "0249e02173778c78a22bf5efd5e62125ee3da0bef35e44bfea9e971a7b89bc1e",
+  "topics": [
+    "Backtracking"
+  ],
+  "skillIds": [
+    "backtracking.undo"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>101-letter-combinations-of-a-phone-number</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Letter Combinations of a Phone Number\n\n## Problem Description\n\nGiven a string containing digits from 2 to 9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.\n\nA mapping of digits to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.\n\n    2: abc\n    3: def\n    4: ghi\n    5: jkl\n    6: mno\n    7: pqrs\n    8: tuv\n    9: wxyz\n\n## Input / Output\n\n### Input\n\n- A string `digits` consisting of digits from 2-9\n\n### Output\n\n- All letter combinations the digits could represent\n- The answer may be returned in any order\n\n## Examples\n\n### Example 1\n\nInput:\n\n    digits = \"23\"\n\nOutput:\n\n    [\"ad\",\"ae\",\"af\",\"bd\",\"be\",\"bf\",\"cd\",\"ce\",\"cf\"]\n\n### Example 2\n\nInput:\n\n    digits = \"\"\n\nOutput:\n\n    []\n\n### Example 3\n\nInput:\n\n    digits = \"2\"\n\nOutput:\n\n    [\"a\",\"b\",\"c\"]\n\n## Constraints\n\n- 0 <= digits.length <= 4\n- digits[i] is a digit in the range ['2', '9']\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "import java.util.ArrayList;\nimport java.util.List;\n\nclass Completed {\n\n    private static final String[] KEYPAD = {\n        \"\", \"\", \"abc\", \"def\", \"ghi\", \"jkl\", \"mno\", \"pqrs\", \"tuv\", \"wxyz\"\n    };\n\n    public List<String> letterCombinations(String digits) {\n\n        List<String> result = new ArrayList<>();\n\n        if (digits == null || digits.length() == 0) {\n            return result;\n        }\n\n        backtrack(digits, 0, new StringBuilder(), result);\n\n        return result;\n    }\n\n    private void backtrack(\n        String digits,\n        int index,\n        StringBuilder current,\n        List<String> result\n    ) {\n\n        if (index == digits.length()) {\n            result.add(current.toString());\n            return;\n        }\n\n        String letters = KEYPAD[digits.charAt(index) - '0'];\n\n        for (int i = 0; i < letters.length(); i++) {\n            current.append(letters.charAt(i));\n            backtrack(digits, index + 1, current, result);\n            current.deleteCharAt(current.length() - 1);\n        }\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "import java.util.List;\n\nclass Solution {\n\n    public List<String> letterCombinations(String digits) {\n\n        return null;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport java.util.Arrays;\nimport java.util.HashSet;\nimport java.util.List;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\nimport static org.junit.jupiter.api.Assertions.assertTrue;\n\n@DisplayName(\"110/101_letter_combinations_of_a_phone_number (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnAllCombinationsForTwoDigits() {\n\n        Solution solution = new Solution();\n\n        List<String> result = solution.letterCombinations(\"23\");\n\n        assertEquals(\n            new HashSet<>(Arrays.asList(\n                \"ad\", \"ae\", \"af\", \"bd\", \"be\", \"bf\", \"cd\", \"ce\", \"cf\"\n            )),\n            new HashSet<>(result)\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnEmptyForEmptyInput() {\n\n        Solution solution = new Solution();\n\n        assertTrue(solution.letterCombinations(\"\").isEmpty());\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnLettersForSingleDigit() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            new HashSet<>(Arrays.asList(\"a\", \"b\", \"c\")),\n            new HashSet<>(solution.letterCombinations(\"2\"))\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleDigitSevenWithFourLetters() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            new HashSet<>(Arrays.asList(\"p\", \"q\", \"r\", \"s\")),\n            new HashSet<>(solution.letterCombinations(\"7\"))\n        );\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport java.util.Arrays;\nimport java.util.HashSet;\nimport java.util.List;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\nimport static org.junit.jupiter.api.Assertions.assertTrue;\n\n@DisplayName(\"110/101_letter_combinations_of_a_phone_number\")\nclass SolutionTest {\n\n    @Test\n    void shouldReturnAllCombinationsForTwoDigits() {\n\n        Completed solution = new Completed();\n\n        List<String> result = solution.letterCombinations(\"23\");\n\n        assertEquals(\n            new HashSet<>(Arrays.asList(\n                \"ad\", \"ae\", \"af\", \"bd\", \"be\", \"bf\", \"cd\", \"ce\", \"cf\"\n            )),\n            new HashSet<>(result)\n        );\n    }\n\n    @Test\n    void shouldReturnEmptyForEmptyInput() {\n\n        Completed solution = new Completed();\n\n        assertTrue(solution.letterCombinations(\"\").isEmpty());\n    }\n\n    @Test\n    void shouldReturnLettersForSingleDigit() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            new HashSet<>(Arrays.asList(\"a\", \"b\", \"c\")),\n            new HashSet<>(solution.letterCombinations(\"2\"))\n        );\n    }\n\n    @Test\n    void shouldHandleDigitSevenWithFourLetters() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            new HashSet<>(Arrays.asList(\"p\", \"q\", \"r\", \"s\")),\n            new HashSet<>(solution.letterCombinations(\"7\"))\n        );\n    }\n}\n"
+    }
+  ]
+}

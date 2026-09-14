@@ -1,0 +1,38 @@
+{
+  "id": "minimum-path-sum",
+  "title": "Minimum Path Sum",
+  "sourcePath": "150/143_minimum_path_sum",
+  "hash": "64f9422482d4ca22f83beebf01949eb997e4413b82a24433a7667d97445b1c7a",
+  "topics": [
+    "Dynamic programming"
+  ],
+  "skillIds": [
+    "dp.state"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>143-minimum-path-sum</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Minimum Path Sum\n\n## Problem Description\n\nGiven an `m x n` grid filled with non-negative numbers, find a path from the top-left corner to the bottom-right corner that minimizes the sum of all numbers along the path.\n\nYou may only move either down or right at any point.\n\n## Input / Output\n\n### Input\n\n- A 2D integer grid `grid`\n\n### Output\n\n- The minimum path sum from top-left to bottom-right\n\n## Examples\n\n### Example 1\n\nInput:\n\n    grid = [[1,3,1],[1,5,1],[4,2,1]]\n\nOutput:\n\n    7\n\nExplanation:\n\nThe path 1 -> 3 -> 1 -> 1 -> 1 sums to 7.\n\n### Example 2\n\nInput:\n\n    grid = [[1,2,3],[4,5,6]]\n\nOutput:\n\n    12\n\n## Constraints\n\n- m == grid.length\n- n == grid[i].length\n- 1 <= m, n <= 200\n- 0 <= grid[i][j] <= 200\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "class Completed {\n\n    public int minPathSum(int[][] grid) {\n\n        int rows = grid.length;\n        int cols = grid[0].length;\n        int[][] dp = new int[rows][cols];\n\n        dp[0][0] = grid[0][0];\n\n        for (int col = 1; col < cols; col++) {\n            dp[0][col] = dp[0][col - 1] + grid[0][col];\n        }\n\n        for (int row = 1; row < rows; row++) {\n            dp[row][0] = dp[row - 1][0] + grid[row][0];\n        }\n\n        for (int row = 1; row < rows; row++) {\n            for (int col = 1; col < cols; col++) {\n                dp[row][col] = grid[row][col] + Math.min(dp[row - 1][col], dp[row][col - 1]);\n            }\n        }\n\n        return dp[rows - 1][cols - 1];\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public int minPathSum(int[][] grid) {\n\n        return 0;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"150/143_minimum_path_sum (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnMinPathForExample1() {\n\n        Solution solution = new Solution();\n\n        int[][] grid = {\n            {1, 3, 1},\n            {1, 5, 1},\n            {4, 2, 1}\n        };\n\n        assertEquals(7, solution.minPathSum(grid));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnMinPathForExample2() {\n\n        Solution solution = new Solution();\n\n        int[][] grid = {\n            {1, 2, 3},\n            {4, 5, 6}\n        };\n\n        assertEquals(12, solution.minPathSum(grid));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleSingleCell() {\n\n        Solution solution = new Solution();\n\n        assertEquals(5, solution.minPathSum(new int[][]{{5}}));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleSingleRow() {\n\n        Solution solution = new Solution();\n\n        assertEquals(6, solution.minPathSum(new int[][]{{1, 2, 3}}));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleSingleColumn() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            6,\n            solution.minPathSum(new int[][]{{1}, {2}, {3}})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldPreferLowerSumPath() {\n\n        Solution solution = new Solution();\n\n        int[][] grid = {\n            {1, 2},\n            {1, 1}\n        };\n\n        assertEquals(3, solution.minPathSum(grid));\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"150/143_minimum_path_sum\")\nclass SolutionTest {\n\n    @Test\n    void shouldReturnMinPathForExample1() {\n\n        Completed solution = new Completed();\n\n        int[][] grid = {\n            {1, 3, 1},\n            {1, 5, 1},\n            {4, 2, 1}\n        };\n\n        assertEquals(7, solution.minPathSum(grid));\n    }\n\n    @Test\n    void shouldReturnMinPathForExample2() {\n\n        Completed solution = new Completed();\n\n        int[][] grid = {\n            {1, 2, 3},\n            {4, 5, 6}\n        };\n\n        assertEquals(12, solution.minPathSum(grid));\n    }\n\n    @Test\n    void shouldHandleSingleCell() {\n\n        Completed solution = new Completed();\n\n        assertEquals(5, solution.minPathSum(new int[][]{{5}}));\n    }\n\n    @Test\n    void shouldHandleSingleRow() {\n\n        Completed solution = new Completed();\n\n        assertEquals(6, solution.minPathSum(new int[][]{{1, 2, 3}}));\n    }\n\n    @Test\n    void shouldHandleSingleColumn() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            6,\n            solution.minPathSum(new int[][]{{1}, {2}, {3}})\n        );\n    }\n\n    @Test\n    void shouldPreferLowerSumPath() {\n\n        Completed solution = new Completed();\n\n        int[][] grid = {\n            {1, 2},\n            {1, 1}\n        };\n\n        assertEquals(3, solution.minPathSum(grid));\n    }\n}\n"
+    }
+  ]
+}
