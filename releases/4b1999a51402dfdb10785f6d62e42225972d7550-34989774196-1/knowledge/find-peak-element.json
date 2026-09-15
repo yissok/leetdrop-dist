@@ -1,0 +1,38 @@
+{
+  "id": "find-peak-element",
+  "title": "Find Peak Element",
+  "sourcePath": "120/116_find_peak_element",
+  "hash": "c1a14dfa0bcb536bee1988c84a2c9a4103081630d1e778d40e3842e74c206878",
+  "topics": [
+    "Binary search"
+  ],
+  "skillIds": [
+    "binary-search.partition"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>116-find-peak-element</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Find Peak Element\n\n## Problem Description\n\nA peak element is an element that is strictly greater than its neighbors.\n\nGiven a 0-indexed integer array `nums`, find a peak element and return its index. If the array contains multiple peaks, return the index of any one of them.\n\nYou may imagine that `nums[-1] = nums[n] = -infinity`. For indices on the ends, a neighbor only needs to be greater than the single adjacent element.\n\nYou must write an algorithm that runs in O(log n) time.\n\n## Input / Output\n\n### Input\n\n- An integer array `nums`\n\n### Output\n\n- The index of any peak element\n\n## Examples\n\n### Example 1\n\nInput:\n\n    nums = [1,2,3,1]\n\nOutput:\n\n    2\n\n### Example 2\n\nInput:\n\n    nums = [1,2,1,3,5,6,4]\n\nOutput:\n\n    5\n\n## Constraints\n\n- 1 <= nums.length <= 1000\n- -2^31 <= nums[i] <= 2^31 - 1\n- nums[i] != nums[i + 1] for all valid i\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "class Completed {\n\n    public int findPeakElement(int[] nums) {\n\n        int left = 0;\n        int right = nums.length - 1;\n\n        while (left < right) {\n\n            int mid = left + (right - left) / 2;\n\n            if (nums[mid] > nums[mid + 1]) {\n                right = mid;\n            } else {\n                left = mid + 1;\n            }\n        }\n\n        return left;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public int findPeakElement(int[] nums) {\n\n        return 0;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\nimport static org.junit.jupiter.api.Assertions.assertTrue;\n\n@DisplayName(\"120/116_find_peak_element (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldFindPeakInExample1() {\n\n        Solution solution = new Solution();\n\n        assertEquals(2, solution.findPeakElement(new int[]{1, 2, 3, 1}));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldFindAnyValidPeakInExample2() {\n\n        Solution solution = new Solution();\n\n        int index = solution.findPeakElement(new int[]{1, 2, 1, 3, 5, 6, 4});\n        int[] nums = {1, 2, 1, 3, 5, 6, 4};\n\n        boolean leftOk = index == 0 || nums[index] > nums[index - 1];\n        boolean rightOk = index == nums.length - 1 || nums[index] > nums[index + 1];\n\n        assertTrue(leftOk && rightOk);\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleSingleElement() {\n\n        Solution solution = new Solution();\n\n        assertEquals(0, solution.findPeakElement(new int[]{1}));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleStrictlyIncreasing() {\n\n        Solution solution = new Solution();\n\n        assertEquals(3, solution.findPeakElement(new int[]{1, 2, 3, 4}));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleStrictlyDecreasing() {\n\n        Solution solution = new Solution();\n\n        assertEquals(0, solution.findPeakElement(new int[]{4, 3, 2, 1}));\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\nimport static org.junit.jupiter.api.Assertions.assertTrue;\n\n@DisplayName(\"120/116_find_peak_element\")\nclass SolutionTest {\n\n    @Test\n    void shouldFindPeakInExample1() {\n\n        Completed solution = new Completed();\n\n        assertEquals(2, solution.findPeakElement(new int[]{1, 2, 3, 1}));\n    }\n\n    @Test\n    void shouldFindAnyValidPeakInExample2() {\n\n        Completed solution = new Completed();\n\n        int index = solution.findPeakElement(new int[]{1, 2, 1, 3, 5, 6, 4});\n        int[] nums = {1, 2, 1, 3, 5, 6, 4};\n\n        boolean leftOk = index == 0 || nums[index] > nums[index - 1];\n        boolean rightOk = index == nums.length - 1 || nums[index] > nums[index + 1];\n\n        assertTrue(leftOk && rightOk);\n    }\n\n    @Test\n    void shouldHandleSingleElement() {\n\n        Completed solution = new Completed();\n\n        assertEquals(0, solution.findPeakElement(new int[]{1}));\n    }\n\n    @Test\n    void shouldHandleStrictlyIncreasing() {\n\n        Completed solution = new Completed();\n\n        assertEquals(3, solution.findPeakElement(new int[]{1, 2, 3, 4}));\n    }\n\n    @Test\n    void shouldHandleStrictlyDecreasing() {\n\n        Completed solution = new Completed();\n\n        assertEquals(0, solution.findPeakElement(new int[]{4, 3, 2, 1}));\n    }\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "id": "word-ladder",
+  "title": "Word Ladder",
+  "sourcePath": "100/97_word_ladder",
+  "hash": "64beaa999679e0a198824cda9249fa23bc0cc7213f527a9b57372c73f7c614b8",
+  "topics": [
+    "Graphs"
+  ],
+  "skillIds": [
+    "hashmap.lookup",
+    "java.queue",
+    "graph.bfs"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>97-word-ladder</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Word Ladder\n\n## Problem Description\n\nA transformation sequence from beginWord to endWord is a sequence of words where:\n\n- The first word is beginWord\n- The last word is endWord\n- Each adjacent pair differs by exactly one character\n- Every intermediate word belongs to wordList\n\nReturn the number of words in the shortest transformation sequence from beginWord to endWord. If no such sequence exists, return 0.\n\n## Input / Output\n\n### Input\n\n- `beginWord`: starting word\n- `endWord`: target word\n- `wordList`: list of allowed intermediate words\n\n### Output\n\n- Length of the shortest ladder, or 0 if impossible\n\n## Examples\n\n### Example 1\n\nInput:\n\n    beginWord = \"hit\"\n    endWord = \"cog\"\n    wordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]\n\nOutput:\n\n    5\n\n### Example 2\n\nInput:\n\n    beginWord = \"hit\"\n    endWord = \"cog\"\n    wordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\"]\n\nOutput:\n\n    0\n\n### Example 3\n\nInput:\n\n    beginWord = \"a\"\n    endWord = \"c\"\n    wordList = [\"a\",\"b\",\"c\"]\n\nOutput:\n\n    2\n\n## Constraints\n\n- 1 <= beginWord.length <= 10\n- endWord.length == beginWord.length\n- 1 <= wordList.length <= 5000\n- wordList[i].length == beginWord.length\n- beginWord, endWord, and wordList[i] consist of lowercase English letters\n- beginWord != endWord\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "import java.util.ArrayDeque;\nimport java.util.HashSet;\nimport java.util.List;\nimport java.util.Queue;\nimport java.util.Set;\n\nclass Completed {\n\n    public int ladderLength(String beginWord, String endWord, List<String> wordList) {\n\n        Set<String> dictionary = new HashSet<>(wordList);\n        if (!dictionary.contains(endWord)) {\n            return 0;\n        }\n\n        Queue<String> queue = new ArrayDeque<>();\n        Set<String> visited = new HashSet<>();\n        queue.offer(beginWord);\n        visited.add(beginWord);\n        int length = 1;\n\n        while (!queue.isEmpty()) {\n            int size = queue.size();\n            for (int i = 0; i < size; i++) {\n                String current = queue.poll();\n                if (current.equals(endWord)) {\n                    return length;\n                }\n\n                char[] chars = current.toCharArray();\n                for (int pos = 0; pos < chars.length; pos++) {\n                    char original = chars[pos];\n                    for (char c = 'a'; c <= 'z'; c++) {\n                        if (c == original) {\n                            continue;\n                        }\n                        chars[pos] = c;\n                        String next = new String(chars);\n                        if (dictionary.contains(next) && visited.add(next)) {\n                            queue.offer(next);\n                        }\n                    }\n                    chars[pos] = original;\n                }\n            }\n            length++;\n        }\n\n        return 0;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "import java.util.List;\n\nclass Solution {\n\n    public int ladderLength(String beginWord, String endWord, List<String> wordList) {\n\n        return 0;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport java.util.Arrays;\nimport java.util.Collections;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"100/97_word_ladder (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldFindShortestLadder() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            5,\n            solution.ladderLength(\n                \"hit\",\n                \"cog\",\n                Arrays.asList(\"hot\", \"dot\", \"dog\", \"lot\", \"log\", \"cog\")\n            )\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnZeroWhenEndMissing() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            0,\n            solution.ladderLength(\n                \"hit\",\n                \"cog\",\n                Arrays.asList(\"hot\", \"dot\", \"dog\", \"lot\", \"log\")\n            )\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleSingleLetterWords() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            2,\n            solution.ladderLength(\"a\", \"c\", Arrays.asList(\"a\", \"b\", \"c\"))\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnZeroForDisconnectedGraph() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            0,\n            solution.ladderLength(\"hit\", \"cog\", Collections.singletonList(\"hot\"))\n        );\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport java.util.Arrays;\nimport java.util.Collections;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"100/97_word_ladder\")\nclass SolutionTest {\n\n    @Test\n    void shouldFindShortestLadder() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            5,\n            solution.ladderLength(\n                \"hit\",\n                \"cog\",\n                Arrays.asList(\"hot\", \"dot\", \"dog\", \"lot\", \"log\", \"cog\")\n            )\n        );\n    }\n\n    @Test\n    void shouldReturnZeroWhenEndMissing() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            0,\n            solution.ladderLength(\n                \"hit\",\n                \"cog\",\n                Arrays.asList(\"hot\", \"dot\", \"dog\", \"lot\", \"log\")\n            )\n        );\n    }\n\n    @Test\n    void shouldHandleSingleLetterWords() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            2,\n            solution.ladderLength(\"a\", \"c\", Arrays.asList(\"a\", \"b\", \"c\"))\n        );\n    }\n\n    @Test\n    void shouldReturnZeroForDisconnectedGraph() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            0,\n            solution.ladderLength(\"hit\", \"cog\", Collections.singletonList(\"hot\"))\n        );\n    }\n}\n"
+    }
+  ]
+}
