@@ -1,0 +1,39 @@
+{
+  "id": "interleaving-string",
+  "title": "Interleaving String",
+  "sourcePath": "150/146_interleaving_string",
+  "hash": "2e68eaa4f8fa7972a1921f2f4dfe7d4f430bf0ebff13d5a4bd1b4d0365bdb109",
+  "topics": [
+    "Dynamic programming"
+  ],
+  "skillIds": [
+    "dp.state",
+    "complexity.dp-space"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>146-interleaving-string</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Interleaving String\n\n## Problem Description\n\nGiven strings `s1`, `s2`, and `s3`, return whether `s3` is formed by an interleaving of `s1` and `s2`.\n\nAn interleaving of two strings `a` and `b` is a string that contains all characters of both while preserving the relative order of characters from each string.\n\n## Input / Output\n\n### Input\n\n- Three strings `s1`, `s2`, and `s3`\n\n### Output\n\n- `true` if `s3` is an interleaving of `s1` and `s2`\n- `false` otherwise\n\n## Examples\n\n### Example 1\n\nInput:\n\n    s1 = \"aabcc\"\n    s2 = \"dbbca\"\n    s3 = \"aadbbcbcac\"\n\nOutput:\n\n    true\n\n### Example 2\n\nInput:\n\n    s1 = \"aabcc\"\n    s2 = \"dbbca\"\n    s3 = \"aadbbbaccc\"\n\nOutput:\n\n    false\n\n### Example 3\n\nInput:\n\n    s1 = \"\"\n    s2 = \"\"\n    s3 = \"\"\n\nOutput:\n\n    true\n\n## Constraints\n\n- 0 <= s1.length, s2.length <= 100\n- 0 <= s3.length <= 200\n- s1, s2, and s3 consist of lowercase English letters\n\n## Follow-up\n\nCould you solve it using only O(s2.length) additional memory space?\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "class Completed {\n\n    public boolean isInterleave(String s1, String s2, String s3) {\n\n        if (s1.length() + s2.length() != s3.length()) {\n            return false;\n        }\n\n        boolean[] dp = new boolean[s2.length() + 1];\n\n        for (int i = 0; i <= s1.length(); i++) {\n            for (int j = 0; j <= s2.length(); j++) {\n\n                if (i == 0 && j == 0) {\n                    dp[j] = true;\n                } else if (i == 0) {\n                    dp[j] = dp[j - 1] && s2.charAt(j - 1) == s3.charAt(j - 1);\n                } else if (j == 0) {\n                    dp[j] = dp[j] && s1.charAt(i - 1) == s3.charAt(i - 1);\n                } else {\n                    dp[j] = (dp[j] && s1.charAt(i - 1) == s3.charAt(i + j - 1))\n                        || (dp[j - 1] && s2.charAt(j - 1) == s3.charAt(i + j - 1));\n                }\n            }\n        }\n\n        return dp[s2.length()];\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public boolean isInterleave(String s1, String s2, String s3) {\n\n        return false;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertFalse;\nimport static org.junit.jupiter.api.Assertions.assertTrue;\n\n@DisplayName(\"150/146_interleaving_string (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnTrueForExample1() {\n\n        Solution solution = new Solution();\n\n        assertTrue(solution.isInterleave(\"aabcc\", \"dbbca\", \"aadbbcbcac\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnFalseForExample2() {\n\n        Solution solution = new Solution();\n\n        assertFalse(solution.isInterleave(\"aabcc\", \"dbbca\", \"aadbbbaccc\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnTrueForEmptyStrings() {\n\n        Solution solution = new Solution();\n\n        assertTrue(solution.isInterleave(\"\", \"\", \"\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnTrueWhenOneStringEmpty() {\n\n        Solution solution = new Solution();\n\n        assertTrue(solution.isInterleave(\"abc\", \"\", \"abc\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnFalseWhenLengthsMismatch() {\n\n        Solution solution = new Solution();\n\n        assertFalse(solution.isInterleave(\"a\", \"b\", \"a\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnFalseWhenCharactersDoNotMatch() {\n\n        Solution solution = new Solution();\n\n        assertFalse(solution.isInterleave(\"ab\", \"cd\", \"acbe\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleSimpleInterleave() {\n\n        Solution solution = new Solution();\n\n        assertTrue(solution.isInterleave(\"ab\", \"cd\", \"acbd\"));\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertFalse;\nimport static org.junit.jupiter.api.Assertions.assertTrue;\n\n@DisplayName(\"150/146_interleaving_string\")\nclass SolutionTest {\n\n    @Test\n    void shouldReturnTrueForExample1() {\n\n        Completed solution = new Completed();\n\n        assertTrue(solution.isInterleave(\"aabcc\", \"dbbca\", \"aadbbcbcac\"));\n    }\n\n    @Test\n    void shouldReturnFalseForExample2() {\n\n        Completed solution = new Completed();\n\n        assertFalse(solution.isInterleave(\"aabcc\", \"dbbca\", \"aadbbbaccc\"));\n    }\n\n    @Test\n    void shouldReturnTrueForEmptyStrings() {\n\n        Completed solution = new Completed();\n\n        assertTrue(solution.isInterleave(\"\", \"\", \"\"));\n    }\n\n    @Test\n    void shouldReturnTrueWhenOneStringEmpty() {\n\n        Completed solution = new Completed();\n\n        assertTrue(solution.isInterleave(\"abc\", \"\", \"abc\"));\n    }\n\n    @Test\n    void shouldReturnFalseWhenLengthsMismatch() {\n\n        Completed solution = new Completed();\n\n        assertFalse(solution.isInterleave(\"a\", \"b\", \"a\"));\n    }\n\n    @Test\n    void shouldReturnFalseWhenCharactersDoNotMatch() {\n\n        Completed solution = new Completed();\n\n        assertFalse(solution.isInterleave(\"ab\", \"cd\", \"acbe\"));\n    }\n\n    @Test\n    void shouldHandleSimpleInterleave() {\n\n        Completed solution = new Completed();\n\n        assertTrue(solution.isInterleave(\"ab\", \"cd\", \"acbd\"));\n    }\n}\n"
+    }
+  ]
+}

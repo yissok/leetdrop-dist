@@ -1,0 +1,38 @@
+{
+  "id": "longest-increasing-subsequence",
+  "title": "Longest Increasing Subsequence",
+  "sourcePath": "150/141_longest_increasing_subsequence",
+  "hash": "2bfa2100778f9d3a16318c0dcfcf93a83391b5cec6dbceb736910cad1e081d44",
+  "topics": [
+    "Binary search"
+  ],
+  "skillIds": [
+    "binary-search.boundary"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>141-longest-increasing-subsequence</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Longest Increasing Subsequence\n\n## Problem Description\n\nGiven an integer array `nums`, return the length of the longest strictly increasing subsequence.\n\nA subsequence is derived from the array by deleting some or no elements without changing the order of the remaining elements.\n\n## Input / Output\n\n### Input\n\n- An integer array `nums`\n\n### Output\n\n- The length of the longest strictly increasing subsequence\n\n## Examples\n\n### Example 1\n\nInput:\n\n    nums = [10,9,2,5,3,7,101,18]\n\nOutput:\n\n    4\n\nExplanation:\n\nOne longest increasing subsequence is [2,3,7,101].\n\n### Example 2\n\nInput:\n\n    nums = [0,1,0,3,2,3]\n\nOutput:\n\n    4\n\n### Example 3\n\nInput:\n\n    nums = [7,7,7,7,7,7,7]\n\nOutput:\n\n    1\n\n## Constraints\n\n- 1 <= nums.length <= 2500\n- -10,000 <= nums[i] <= 10,000\n\n## Follow-up\n\nCan you implement a solution with O(n log n) time complexity?\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "class Completed {\n\n    public int lengthOfLIS(int[] nums) {\n\n        int[] tails = new int[nums.length];\n        int size = 0;\n\n        for (int num : nums) {\n\n            int left = 0;\n            int right = size;\n\n            while (left < right) {\n\n                int mid = left + (right - left) / 2;\n\n                if (tails[mid] < num) {\n                    left = mid + 1;\n                } else {\n                    right = mid;\n                }\n            }\n\n            tails[left] = num;\n\n            if (left == size) {\n                size++;\n            }\n        }\n\n        return size;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public int lengthOfLIS(int[] nums) {\n\n        return 0;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"150/141_longest_increasing_subsequence (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnLengthForExample1() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            4,\n            solution.lengthOfLIS(new int[]{10, 9, 2, 5, 3, 7, 101, 18})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnLengthForExample2() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            4,\n            solution.lengthOfLIS(new int[]{0, 1, 0, 3, 2, 3})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnOneWhenAllEqual() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            1,\n            solution.lengthOfLIS(new int[]{7, 7, 7, 7, 7, 7, 7})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleSingleElement() {\n\n        Solution solution = new Solution();\n\n        assertEquals(1, solution.lengthOfLIS(new int[]{5}));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleStrictlyIncreasing() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            5,\n            solution.lengthOfLIS(new int[]{1, 2, 3, 4, 5})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleStrictlyDecreasing() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            1,\n            solution.lengthOfLIS(new int[]{5, 4, 3, 2, 1})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleNegativeNumbers() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            3,\n            solution.lengthOfLIS(new int[]{-5, -3, -1, -4})\n        );\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"150/141_longest_increasing_subsequence\")\nclass SolutionTest {\n\n    @Test\n    void shouldReturnLengthForExample1() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            4,\n            solution.lengthOfLIS(new int[]{10, 9, 2, 5, 3, 7, 101, 18})\n        );\n    }\n\n    @Test\n    void shouldReturnLengthForExample2() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            4,\n            solution.lengthOfLIS(new int[]{0, 1, 0, 3, 2, 3})\n        );\n    }\n\n    @Test\n    void shouldReturnOneWhenAllEqual() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            1,\n            solution.lengthOfLIS(new int[]{7, 7, 7, 7, 7, 7, 7})\n        );\n    }\n\n    @Test\n    void shouldHandleSingleElement() {\n\n        Completed solution = new Completed();\n\n        assertEquals(1, solution.lengthOfLIS(new int[]{5}));\n    }\n\n    @Test\n    void shouldHandleStrictlyIncreasing() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            5,\n            solution.lengthOfLIS(new int[]{1, 2, 3, 4, 5})\n        );\n    }\n\n    @Test\n    void shouldHandleStrictlyDecreasing() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            1,\n            solution.lengthOfLIS(new int[]{5, 4, 3, 2, 1})\n        );\n    }\n\n    @Test\n    void shouldHandleNegativeNumbers() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            3,\n            solution.lengthOfLIS(new int[]{-5, -3, -1, -4})\n        );\n    }\n}\n"
+    }
+  ]
+}

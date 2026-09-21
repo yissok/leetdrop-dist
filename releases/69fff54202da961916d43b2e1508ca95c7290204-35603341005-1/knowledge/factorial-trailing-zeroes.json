@@ -1,0 +1,38 @@
+{
+  "id": "factorial-trailing-zeroes",
+  "title": "Factorial Trailing Zeroes",
+  "sourcePath": "140/133_factorial_trailing_zeroes",
+  "hash": "72ec0f5f97bdab68b7937b9bc52d2a0540c98a8cbb02e33ebea535f524dd1b84",
+  "topics": [
+    "Bits & math"
+  ],
+  "skillIds": [
+    "math.decomposition"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>133-factorial-trailing-zeroes</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Factorial Trailing Zeroes\n\n## Problem Description\n\nGiven an integer `n`, return the number of trailing zeroes in `n!`.\n\nNote that `n! = n * (n - 1) * (n - 2) * ... * 3 * 2 * 1`.\n\n## Input / Output\n\n### Input\n\n- An integer `n`\n\n### Output\n\n- The number of trailing zeroes in `n!`\n\n## Examples\n\n### Example 1\n\nInput:\n\n    n = 3\n\nOutput:\n\n    0\n\nExplanation:\n\n    3! = 6, no trailing zero.\n\n### Example 2\n\nInput:\n\n    n = 5\n\nOutput:\n\n    1\n\nExplanation:\n\n    5! = 120, one trailing zero.\n\n### Example 3\n\nInput:\n\n    n = 0\n\nOutput:\n\n    0\n\n## Constraints\n\n- 0 <= n <= 10^4\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "class Completed {\n\n    public int trailingZeroes(int n) {\n\n        int count = 0;\n\n        while (n > 0) {\n\n            n /= 5;\n            count += n;\n        }\n\n        return count;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public int trailingZeroes(int n) {\n\n        return 0;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"140/133_factorial_trailing_zeroes (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnZeroForThree() {\n\n        Solution solution = new Solution();\n\n        assertEquals(0, solution.trailingZeroes(3));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnOneForFive() {\n\n        Solution solution = new Solution();\n\n        assertEquals(1, solution.trailingZeroes(5));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnZeroForZero() {\n\n        Solution solution = new Solution();\n\n        assertEquals(0, solution.trailingZeroes(0));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldCountExtraFactorsOfFive() {\n\n        Solution solution = new Solution();\n\n        assertEquals(24, solution.trailingZeroes(100));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnTwoForTen() {\n\n        Solution solution = new Solution();\n\n        assertEquals(2, solution.trailingZeroes(10));\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"140/133_factorial_trailing_zeroes\")\nclass SolutionTest {\n\n    @Test\n    void shouldReturnZeroForThree() {\n\n        Completed solution = new Completed();\n\n        assertEquals(0, solution.trailingZeroes(3));\n    }\n\n    @Test\n    void shouldReturnOneForFive() {\n\n        Completed solution = new Completed();\n\n        assertEquals(1, solution.trailingZeroes(5));\n    }\n\n    @Test\n    void shouldReturnZeroForZero() {\n\n        Completed solution = new Completed();\n\n        assertEquals(0, solution.trailingZeroes(0));\n    }\n\n    @Test\n    void shouldCountExtraFactorsOfFive() {\n\n        Completed solution = new Completed();\n\n        assertEquals(24, solution.trailingZeroes(100));\n    }\n\n    @Test\n    void shouldReturnTwoForTen() {\n\n        Completed solution = new Completed();\n\n        assertEquals(2, solution.trailingZeroes(10));\n    }\n}\n"
+    }
+  ]
+}
