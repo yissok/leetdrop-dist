@@ -1,0 +1,38 @@
+{
+  "id": "palindrome-number",
+  "title": "Palindrome Number",
+  "sourcePath": "140/131_palindrome_number",
+  "hash": "79345e329ee763fa475c3c8c42b661dd58ed7d62624b220a70f288c2f073eba0",
+  "topics": [
+    "Bits & math"
+  ],
+  "skillIds": [
+    "math.decomposition"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>131-palindrome-number</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Palindrome Number\n\n## Problem Description\n\nGiven an integer `x`, return `true` if `x` is a palindrome, and `false` otherwise.\n\nAn integer is a palindrome when it reads the same forward and backward.\n\n## Input / Output\n\n### Input\n\n- An integer `x`\n\n### Output\n\n- `true` if `x` is a palindrome\n- `false` otherwise\n\n## Examples\n\n### Example 1\n\nInput:\n\n    x = 121\n\nOutput:\n\n    true\n\n### Example 2\n\nInput:\n\n    x = -121\n\nOutput:\n\n    false\n\nExplanation:\n\n    From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.\n\n### Example 3\n\nInput:\n\n    x = 10\n\nOutput:\n\n    false\n\nExplanation:\n\n    Reads 01 from right to left. Therefore it is not a palindrome.\n\n## Constraints\n\n- -2^31 <= x <= 2^31 - 1\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "class Completed {\n\n    public boolean isPalindrome(int x) {\n\n        if (x < 0 || (x % 10 == 0 && x != 0)) {\n            return false;\n        }\n\n        int reversed = 0;\n\n        while (x > reversed) {\n\n            reversed = reversed * 10 + x % 10;\n            x /= 10;\n        }\n\n        return x == reversed || x == reversed / 10;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public boolean isPalindrome(int x) {\n\n        return false;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertFalse;\nimport static org.junit.jupiter.api.Assertions.assertTrue;\n\n@DisplayName(\"140/131_palindrome_number (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldAcceptOneHundredTwentyOne() {\n\n        Solution solution = new Solution();\n\n        assertTrue(solution.isPalindrome(121));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldRejectNegativeNumber() {\n\n        Solution solution = new Solution();\n\n        assertFalse(solution.isPalindrome(-121));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldRejectTen() {\n\n        Solution solution = new Solution();\n\n        assertFalse(solution.isPalindrome(10));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldAcceptZero() {\n\n        Solution solution = new Solution();\n\n        assertTrue(solution.isPalindrome(0));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldAcceptSingleDigit() {\n\n        Solution solution = new Solution();\n\n        assertTrue(solution.isPalindrome(7));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldAcceptEvenLengthPalindrome() {\n\n        Solution solution = new Solution();\n\n        assertTrue(solution.isPalindrome(1221));\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertFalse;\nimport static org.junit.jupiter.api.Assertions.assertTrue;\n\n@DisplayName(\"140/131_palindrome_number\")\nclass SolutionTest {\n\n    @Test\n    void shouldAcceptOneHundredTwentyOne() {\n\n        Completed solution = new Completed();\n\n        assertTrue(solution.isPalindrome(121));\n    }\n\n    @Test\n    void shouldRejectNegativeNumber() {\n\n        Completed solution = new Completed();\n\n        assertFalse(solution.isPalindrome(-121));\n    }\n\n    @Test\n    void shouldRejectTen() {\n\n        Completed solution = new Completed();\n\n        assertFalse(solution.isPalindrome(10));\n    }\n\n    @Test\n    void shouldAcceptZero() {\n\n        Completed solution = new Completed();\n\n        assertTrue(solution.isPalindrome(0));\n    }\n\n    @Test\n    void shouldAcceptSingleDigit() {\n\n        Completed solution = new Completed();\n\n        assertTrue(solution.isPalindrome(7));\n    }\n\n    @Test\n    void shouldAcceptEvenLengthPalindrome() {\n\n        Completed solution = new Completed();\n\n        assertTrue(solution.isPalindrome(1221));\n    }\n}\n"
+    }
+  ]
+}
