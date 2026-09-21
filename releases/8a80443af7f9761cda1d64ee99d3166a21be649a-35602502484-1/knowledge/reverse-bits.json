@@ -1,0 +1,38 @@
+{
+  "id": "reverse-bits",
+  "title": "Reverse Bits",
+  "sourcePath": "130/126_reverse_bits",
+  "hash": "67f012e7f8c13832935410b34038b10c8afd5a0a751d96d3daeb8c690b91f083",
+  "topics": [
+    "Bits & math"
+  ],
+  "skillIds": [
+    "bits.state"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>126-reverse-bits</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Reverse Bits\n\n## Problem Description\n\nReverse bits of a given 32 bits unsigned integer.\n\nNote that in some languages, such as Java, there is no unsigned integer type. In this case, both input and output will be given as signed integer types and should not affect your implementation, as the integer's internal binary representation is the same whether it is signed or unsigned.\n\nIn Java, the compiler represents the signed integers using 2's complement notation.\n\n## Input / Output\n\n### Input\n\n- An integer `n` treated as an unsigned 32-bit value\n\n### Output\n\n- The integer whose bits are the reverse of `n`\n\n## Examples\n\n### Example 1\n\nInput:\n\n    n = 43261596\n\nOutput:\n\n    964176192\n\nExplanation:\n\n    00000010100101000001111010011100 -> 00111001011110000010100101000000\n\n### Example 2\n\nInput:\n\n    n = 4294967293\n\nOutput:\n\n    3221225471\n\nExplanation:\n\n    11111111111111111111111111111101 -> 10111111111111111111111111111111\n\n## Constraints\n\n- The input must be a binary string of length 32\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "class Completed {\n\n    public int reverseBits(int n) {\n\n        int result = 0;\n\n        for (int i = 0; i < 32; i++) {\n\n            result = (result << 1) | (n & 1);\n            n >>>= 1;\n        }\n\n        return result;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public int reverseBits(int n) {\n\n        return 0;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"130/126_reverse_bits (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReverseBitsOfExample1() {\n\n        Solution solution = new Solution();\n\n        assertEquals(964176192, solution.reverseBits(43261596));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReverseBitsOfAllOnesExceptOne() {\n\n        Solution solution = new Solution();\n\n        assertEquals(-1073741825, solution.reverseBits(-3));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReverseZero() {\n\n        Solution solution = new Solution();\n\n        assertEquals(0, solution.reverseBits(0));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReverseOne() {\n\n        Solution solution = new Solution();\n\n        assertEquals(Integer.MIN_VALUE, solution.reverseBits(1));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReverseAllOnes() {\n\n        Solution solution = new Solution();\n\n        assertEquals(-1, solution.reverseBits(-1));\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"130/126_reverse_bits\")\nclass SolutionTest {\n\n    @Test\n    void shouldReverseBitsOfExample1() {\n\n        Completed solution = new Completed();\n\n        assertEquals(964176192, solution.reverseBits(43261596));\n    }\n\n    @Test\n    void shouldReverseBitsOfAllOnesExceptOne() {\n\n        Completed solution = new Completed();\n\n        assertEquals(-1073741825, solution.reverseBits(-3));\n    }\n\n    @Test\n    void shouldReverseZero() {\n\n        Completed solution = new Completed();\n\n        assertEquals(0, solution.reverseBits(0));\n    }\n\n    @Test\n    void shouldReverseOne() {\n\n        Completed solution = new Completed();\n\n        assertEquals(Integer.MIN_VALUE, solution.reverseBits(1));\n    }\n\n    @Test\n    void shouldReverseAllOnes() {\n\n        Completed solution = new Completed();\n\n        assertEquals(-1, solution.reverseBits(-1));\n    }\n}\n"
+    }
+  ]
+}

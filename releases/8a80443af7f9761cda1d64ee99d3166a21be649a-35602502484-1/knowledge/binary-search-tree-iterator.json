@@ -1,0 +1,44 @@
+{
+  "id": "binary-search-tree-iterator",
+  "title": "Binary Search Tree Iterator",
+  "sourcePath": "80/79_binary_search_tree_iterator",
+  "hash": "1d4f70854c78d47f41ef54bdaa104e02410e3b97cdb5b034ba5f9ad6c56d8025",
+  "topics": [
+    "Trees"
+  ],
+  "skillIds": [
+    "complexity.amortized",
+    "java.stack",
+    "tree.dfs-state"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>79-binary-search-tree-iterator</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Binary Search Tree Iterator\n\n## Problem Description\n\nImplement an iterator over a binary search tree (BST). The iterator should be initialized with the root of a BST and return the next smallest number in ascending order.\n\nImplement:\n\n- BSTIterator(TreeNode root)\n- boolean hasNext()\n- int next()\n\n`next()` and `hasNext()` should run in average O(1) time and use O(h) memory, where h is the height of the tree.\n\n## Input / Output\n\n### Operations\n\n- Construct the iterator with a BST root\n- Call next/hasNext to traverse values in sorted order\n\n## Examples\n\n### Example 1\n\nInput:\n\n    root = [7,3,15,null,null,9,20]\n    BSTIterator iterator = new BSTIterator(root);\n    iterator.next()\n    iterator.next()\n    iterator.hasNext()\n    iterator.next()\n    iterator.hasNext()\n    iterator.next()\n    iterator.hasNext()\n    iterator.next()\n    iterator.hasNext()\n\nOutput:\n\n    3\n    7\n    true\n    9\n    true\n    15\n    true\n    20\n    false\n\n## Constraints\n\n- The number of nodes in the tree is in the range [1, 100,000]\n- 0 <= Node.val <= 1,000,000\n- next and hasNext will be called at most 100,000 times total\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "import java.util.ArrayDeque;\nimport java.util.Deque;\n\nclass Completed {\n\n    private final Deque<TreeNode> stack = new ArrayDeque<>();\n\n    public Completed(TreeNode root) {\n\n        pushLeft(root);\n    }\n\n    public int next() {\n\n        TreeNode node = stack.pop();\n        pushLeft(node.right);\n        return node.val;\n    }\n\n    public boolean hasNext() {\n\n        return !stack.isEmpty();\n    }\n\n    private void pushLeft(TreeNode node) {\n\n        while (node != null) {\n            stack.push(node);\n            node = node.left;\n        }\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "import java.util.ArrayDeque;\nimport java.util.Deque;\n\nclass Solution {\n\n    private final Deque<TreeNode> stack = new ArrayDeque<>();\n\n    public Solution(TreeNode root) {\n\n    }\n\n    public int next() {\n\n        return 0;\n    }\n\n    public boolean hasNext() {\n\n        return false;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/TreeNode.java",
+      "content": "class TreeNode {\n\n    int val;\n    TreeNode left;\n    TreeNode right;\n\n    TreeNode() {\n    }\n\n    TreeNode(int val) {\n        this.val = val;\n    }\n\n    TreeNode(int val, TreeNode left, TreeNode right) {\n        this.val = val;\n        this.left = left;\n        this.right = right;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\nimport static org.junit.jupiter.api.Assertions.assertFalse;\nimport static org.junit.jupiter.api.Assertions.assertTrue;\n\n@DisplayName(\"80/79_binary_search_tree_iterator (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldIterateInOrder() {\n\n        TreeNode root = new TreeNode(\n            7,\n            new TreeNode(3),\n            new TreeNode(15, new TreeNode(9), new TreeNode(20))\n        );\n\n        Solution iterator = new Solution(root);\n\n        assertEquals(3, iterator.next());\n        assertEquals(7, iterator.next());\n        assertTrue(iterator.hasNext());\n        assertEquals(9, iterator.next());\n        assertTrue(iterator.hasNext());\n        assertEquals(15, iterator.next());\n        assertTrue(iterator.hasNext());\n        assertEquals(20, iterator.next());\n        assertFalse(iterator.hasNext());\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleSingleNode() {\n\n        Solution iterator = new Solution(new TreeNode(1));\n\n        assertTrue(iterator.hasNext());\n        assertEquals(1, iterator.next());\n        assertFalse(iterator.hasNext());\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleLeftSkewedTree() {\n\n        TreeNode root = new TreeNode(3, new TreeNode(2, new TreeNode(1), null), null);\n        Solution iterator = new Solution(root);\n\n        assertEquals(1, iterator.next());\n        assertEquals(2, iterator.next());\n        assertEquals(3, iterator.next());\n        assertFalse(iterator.hasNext());\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\nimport static org.junit.jupiter.api.Assertions.assertFalse;\nimport static org.junit.jupiter.api.Assertions.assertTrue;\n\n@DisplayName(\"80/79_binary_search_tree_iterator\")\nclass SolutionTest {\n\n    @Test\n    void shouldIterateInOrder() {\n\n        TreeNode root = new TreeNode(\n            7,\n            new TreeNode(3),\n            new TreeNode(15, new TreeNode(9), new TreeNode(20))\n        );\n\n        Completed iterator = new Completed(root);\n\n        assertEquals(3, iterator.next());\n        assertEquals(7, iterator.next());\n        assertTrue(iterator.hasNext());\n        assertEquals(9, iterator.next());\n        assertTrue(iterator.hasNext());\n        assertEquals(15, iterator.next());\n        assertTrue(iterator.hasNext());\n        assertEquals(20, iterator.next());\n        assertFalse(iterator.hasNext());\n    }\n\n    @Test\n    void shouldHandleSingleNode() {\n\n        Completed iterator = new Completed(new TreeNode(1));\n\n        assertTrue(iterator.hasNext());\n        assertEquals(1, iterator.next());\n        assertFalse(iterator.hasNext());\n    }\n\n    @Test\n    void shouldHandleLeftSkewedTree() {\n\n        TreeNode root = new TreeNode(3, new TreeNode(2, new TreeNode(1), null), null);\n        Completed iterator = new Completed(root);\n\n        assertEquals(1, iterator.next());\n        assertEquals(2, iterator.next());\n        assertEquals(3, iterator.next());\n        assertFalse(iterator.hasNext());\n    }\n}\n"
+    }
+  ]
+}

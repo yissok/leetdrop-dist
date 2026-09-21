@@ -1,0 +1,40 @@
+{
+  "id": "find-median-from-data-stream",
+  "title": "Find Median from Data Stream",
+  "sourcePath": "130/124_find_median_from_data_stream",
+  "hash": "2167ec14f99ca6fcb104ef3195b7ed8580d920b802fb58de491ebe00c497be44",
+  "topics": [
+    "Heaps"
+  ],
+  "skillIds": [
+    "java.comparator",
+    "heap.dynamic-extreme",
+    "heap.median"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>124-find-median-from-data-stream</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Find Median from Data Stream\n\n## Problem Description\n\nThe median is the middle value in an ordered integer list. If the size of the list is even, there is no middle value, and the median is the mean of the two middle values.\n\nImplement the MedianFinder class:\n\n- MedianFinder() initializes the MedianFinder object\n- void addNum(int num) adds the integer num from the data stream to the data structure\n- double findMedian() returns the median of all elements so far\n\nAnswers within 10^-5 of the actual answer will be accepted.\n\n## Input / Output\n\n### Operations\n\n- addNum inserts a number into the stream\n- findMedian returns the current median\n\n## Examples\n\n### Example 1\n\nInput:\n\n    MedianFinder medianFinder = new MedianFinder();\n    medianFinder.addNum(1)\n    medianFinder.addNum(2)\n    medianFinder.findMedian()\n    medianFinder.addNum(3)\n    medianFinder.findMedian()\n\nOutput:\n\n    1.5\n    2.0\n\n## Constraints\n\n- -100,000 <= num <= 100,000\n- There will be at least one element in the data structure before calling findMedian\n- At most 50,000 calls will be made to addNum and findMedian\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "import java.util.PriorityQueue;\n\nclass Completed {\n\n    private final PriorityQueue<Integer> low = new PriorityQueue<>(\n        (a, b) -> Integer.compare(b, a)\n    );\n    private final PriorityQueue<Integer> high = new PriorityQueue<>();\n\n    public Completed() {\n\n    }\n\n    public void addNum(int num) {\n\n        low.offer(num);\n        high.offer(low.poll());\n\n        if (high.size() > low.size()) {\n            low.offer(high.poll());\n        }\n    }\n\n    public double findMedian() {\n\n        if (low.size() > high.size()) {\n            return low.peek();\n        }\n\n        return (low.peek() + high.peek()) / 2.0;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public Solution() {\n\n    }\n\n    public void addNum(int num) {\n\n    }\n\n    public double findMedian() {\n\n        return 0.0;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"130/124_find_median_from_data_stream (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldFollowOfficialExample() {\n\n        Solution medianFinder = new Solution();\n\n        medianFinder.addNum(1);\n        medianFinder.addNum(2);\n\n        assertEquals(1.5, medianFinder.findMedian(), 1e-5);\n\n        medianFinder.addNum(3);\n\n        assertEquals(2.0, medianFinder.findMedian(), 1e-5);\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleSingleNumber() {\n\n        Solution medianFinder = new Solution();\n\n        medianFinder.addNum(5);\n\n        assertEquals(5.0, medianFinder.findMedian(), 1e-5);\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleOddCount() {\n\n        Solution medianFinder = new Solution();\n\n        medianFinder.addNum(2);\n        medianFinder.addNum(3);\n        medianFinder.addNum(4);\n\n        assertEquals(3.0, medianFinder.findMedian(), 1e-5);\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleEvenCount() {\n\n        Solution medianFinder = new Solution();\n\n        medianFinder.addNum(1);\n        medianFinder.addNum(2);\n        medianFinder.addNum(3);\n        medianFinder.addNum(4);\n\n        assertEquals(2.5, medianFinder.findMedian(), 1e-5);\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleNegatives() {\n\n        Solution medianFinder = new Solution();\n\n        medianFinder.addNum(-1);\n        medianFinder.addNum(-2);\n        medianFinder.addNum(-3);\n\n        assertEquals(-2.0, medianFinder.findMedian(), 1e-5);\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"130/124_find_median_from_data_stream\")\nclass SolutionTest {\n\n    @Test\n    void shouldFollowOfficialExample() {\n\n        Completed medianFinder = new Completed();\n\n        medianFinder.addNum(1);\n        medianFinder.addNum(2);\n\n        assertEquals(1.5, medianFinder.findMedian(), 1e-5);\n\n        medianFinder.addNum(3);\n\n        assertEquals(2.0, medianFinder.findMedian(), 1e-5);\n    }\n\n    @Test\n    void shouldHandleSingleNumber() {\n\n        Completed medianFinder = new Completed();\n\n        medianFinder.addNum(5);\n\n        assertEquals(5.0, medianFinder.findMedian(), 1e-5);\n    }\n\n    @Test\n    void shouldHandleOddCount() {\n\n        Completed medianFinder = new Completed();\n\n        medianFinder.addNum(2);\n        medianFinder.addNum(3);\n        medianFinder.addNum(4);\n\n        assertEquals(3.0, medianFinder.findMedian(), 1e-5);\n    }\n\n    @Test\n    void shouldHandleEvenCount() {\n\n        Completed medianFinder = new Completed();\n\n        medianFinder.addNum(1);\n        medianFinder.addNum(2);\n        medianFinder.addNum(3);\n        medianFinder.addNum(4);\n\n        assertEquals(2.5, medianFinder.findMedian(), 1e-5);\n    }\n\n    @Test\n    void shouldHandleNegatives() {\n\n        Completed medianFinder = new Completed();\n\n        medianFinder.addNum(-1);\n        medianFinder.addNum(-2);\n        medianFinder.addNum(-3);\n\n        assertEquals(-2.0, medianFinder.findMedian(), 1e-5);\n    }\n}\n"
+    }
+  ]
+}
