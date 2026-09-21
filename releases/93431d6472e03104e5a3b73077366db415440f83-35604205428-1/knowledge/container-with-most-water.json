@@ -1,0 +1,38 @@
+{
+  "id": "container-with-most-water",
+  "title": "Container With Most Water",
+  "sourcePath": "30/28_container_with_most_water",
+  "hash": "0e56406a875052d6d51992c48a5c5dafa35064831a35d4ae1f62a9a8e4c8df2d",
+  "topics": [
+    "Arrays & strings"
+  ],
+  "skillIds": [
+    "two-pointers.elimination"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>28-container-with-most-water</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Container With Most Water\n\n## Problem Description\n\nYou are given `n` vertical lines. The `i`-th line’s two endpoints are `(i, 0)` and `(i, height[i])` (0-based or 1-based indexing of positions does not matter as long as consecutive indices are distance 1 apart).\n\nChoose two lines that, together with the x-axis, form a container. Return the **maximum** amount of water the container can store.\n\n## Clarifications\n\n- Area between indices `i` and `j` (i < j) is `min(height[i], height[j]) * (j - i)`.\n- The water level is limited by the shorter line; width is the index distance.\n- You need the maximum area over all pairs, not the pair of tallest lines alone.\n\n## Input\n\n- `height`: heights of the lines\n\n## Output\n\n- Maximum water area\n\n## Examples\n\n### Example 1\n\nInput:\n\n    height = [1,8,6,2,5,4,8,3,7]\n\nOutput:\n\n    49\n\nExplanation:\n\n    Lines at indices 1 and 8 (0-based) with heights 8 and 7 give area min(8,7)*7 = 49.\n\n### Example 2\n\nInput:\n\n    height = [1,1]\n\nOutput:\n\n    1\n\n### Example 3\n\nInput:\n\n    height = [4,3,2,1,4]\n\nOutput:\n\n    16\n\nExplanation:\n\n    Outer lines height 4 and 4, width 4 → area 16.\n\n### Example 4\n\nInput:\n\n    height = [1,2,1]\n\nOutput:\n\n    2\n\n## Constraints\n\n- 2 <= height.length <= 100,000\n- 0 <= height[i] <= 10,000\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "class Completed {\n\n    public int maxArea(int[] height) {\n\n        int left = 0;\n        int right = height.length - 1;\n        int max = 0;\n\n        while (left < right) {\n\n            int area = Math.min(height[left], height[right]) * (right - left);\n            max = Math.max(max, area);\n\n            if (height[left] < height[right]) {\n                left++;\n            } else {\n                right--;\n            }\n        }\n\n        return max;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public int maxArea(int[] height) {\n\n        return 0;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"30/28_container_with_most_water (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnMaxAreaForExample1() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            49,\n            solution.maxArea(new int[]{1, 8, 6, 2, 5, 4, 8, 3, 7})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnMaxAreaForTwoLines() {\n\n        Solution solution = new Solution();\n\n        assertEquals(1, solution.maxArea(new int[]{1, 1}));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnMaxAreaForExample3() {\n\n        Solution solution = new Solution();\n\n        assertEquals(16, solution.maxArea(new int[]{4, 3, 2, 1, 4}));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleIncreasingHeights() {\n\n        Solution solution = new Solution();\n\n        assertEquals(2, solution.maxArea(new int[]{1, 2, 3}));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleDescendingHeights() {\n\n        Solution solution = new Solution();\n\n        assertEquals(6, solution.maxArea(new int[]{5, 4, 3, 2, 1}));\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"30/28_container_with_most_water\")\nclass SolutionTest {\n\n    @Test\n    void shouldReturnMaxAreaForExample1() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            49,\n            solution.maxArea(new int[]{1, 8, 6, 2, 5, 4, 8, 3, 7})\n        );\n    }\n\n    @Test\n    void shouldReturnMaxAreaForTwoLines() {\n\n        Completed solution = new Completed();\n\n        assertEquals(1, solution.maxArea(new int[]{1, 1}));\n    }\n\n    @Test\n    void shouldReturnMaxAreaForExample3() {\n\n        Completed solution = new Completed();\n\n        assertEquals(16, solution.maxArea(new int[]{4, 3, 2, 1, 4}));\n    }\n\n    @Test\n    void shouldHandleIncreasingHeights() {\n\n        Completed solution = new Completed();\n\n        assertEquals(2, solution.maxArea(new int[]{1, 2, 3}));\n    }\n\n    @Test\n    void shouldHandleDescendingHeights() {\n\n        Completed solution = new Completed();\n\n        assertEquals(6, solution.maxArea(new int[]{5, 4, 3, 2, 1}));\n    }\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "jump-game-ii",
+  "title": "Jump Game II",
+  "sourcePath": "10/10_jump_game_ii",
+  "hash": "ab40083c4d531148fa56355907aeb632ac4633739dfd6adddf6a38cb403be177",
+  "topics": [
+    "Arrays & strings"
+  ],
+  "skillIds": [
+    "greedy.choice"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>10-jump-game-ii</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Jump Game II\n\n## Problem Description\n\nYou start at index 0 of `nums`. From index `i` you may jump forward 1..`nums[i]` steps (within bounds).\n\nIt is guaranteed you can reach the last index. Return the **minimum number of jumps** needed to reach the end.\n\n## Clarifications\n\n- Same jump rules as Jump Game I, but now minimize jump count.\n- A single-element array needs 0 jumps.\n- You always can reach the end in the given tests.\n\n## Input\n\n- `nums`: jump lengths; last index is always reachable\n\n## Output\n\n- Minimum jumps to reach the last index\n\n## Examples\n\n### Example 1\n\nInput:\n\n    nums = [2,3,1,1,4]\n\nOutput:\n\n    2\n\nExplanation:\n\n    0 → 1 → 4 is one optimal path (2 jumps). 0 → 2 → … needs more jumps.\n\n### Example 2\n\nInput:\n\n    nums = [2,3,0,1,4]\n\nOutput:\n\n    2\n\n### Example 3\n\nInput:\n\n    nums = [1]\n\nOutput:\n\n    0\n\n### Example 4\n\nInput:\n\n    nums = [1,1,1,1]\n\nOutput:\n\n    3\n\nExplanation:\n\n    Each jump can advance only one index, so you need three jumps to go from 0 to 3.\n\n## Constraints\n\n- 1 <= nums.length <= 10,000\n- 0 <= nums[i] <= 1,000\n- You can always reach nums[n - 1]\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "class Completed {\n\n    public int jump(int[] nums) {\n\n        int jumps = 0;\n        int currentEnd = 0;\n        int farthest = 0;\n\n        for (int i = 0; i < nums.length - 1; i++) {\n\n            farthest = Math.max(farthest, i + nums[i]);\n\n            if (i == currentEnd) {\n                jumps++;\n                currentEnd = farthest;\n            }\n        }\n\n        return jumps;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public int jump(int[] nums) {\n\n        return 0;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"10/10_jump_game_ii (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnMinJumpsForExample1() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            2,\n            solution.jump(new int[]{2, 3, 1, 1, 4})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnMinJumpsForExample2() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            2,\n            solution.jump(new int[]{2, 3, 0, 1, 4})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnZeroForSingleElement() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            0,\n            solution.jump(new int[]{1})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnOneWhenFirstJumpReachesEnd() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            1,\n            solution.jump(new int[]{3, 1, 1, 1})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleAllOnes() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            4,\n            solution.jump(new int[]{1, 1, 1, 1, 1})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleIncreasingRanges() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            2,\n            solution.jump(new int[]{1, 2, 3})\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleLongJumpAtStart() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            1,\n            solution.jump(new int[]{5, 1, 1, 1, 1, 1})\n        );\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"10/10_jump_game_ii\")\nclass SolutionTest {\n\n    @Test\n    void shouldReturnMinJumpsForExample1() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            2,\n            solution.jump(new int[]{2, 3, 1, 1, 4})\n        );\n    }\n\n    @Test\n    void shouldReturnMinJumpsForExample2() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            2,\n            solution.jump(new int[]{2, 3, 0, 1, 4})\n        );\n    }\n\n    @Test\n    void shouldReturnZeroForSingleElement() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            0,\n            solution.jump(new int[]{1})\n        );\n    }\n\n    @Test\n    void shouldReturnOneWhenFirstJumpReachesEnd() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            1,\n            solution.jump(new int[]{3, 1, 1, 1})\n        );\n    }\n\n    @Test\n    void shouldHandleAllOnes() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            4,\n            solution.jump(new int[]{1, 1, 1, 1, 1})\n        );\n    }\n\n    @Test\n    void shouldHandleIncreasingRanges() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            2,\n            solution.jump(new int[]{1, 2, 3})\n        );\n    }\n\n    @Test\n    void shouldHandleLongJumpAtStart() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            1,\n            solution.jump(new int[]{5, 1, 1, 1, 1, 1})\n        );\n    }\n}\n"
+    }
+  ]
+}

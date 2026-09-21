@@ -1,0 +1,39 @@
+{
+  "id": "implement-trie-prefix-tree",
+  "title": "Implement Trie (Prefix Tree)",
+  "sourcePath": "100/98_implement_trie_prefix_tree",
+  "hash": "fb127a4a85311494845053b79397547c154c160fc1f7a8cfa1525b40c02ec73d",
+  "topics": [
+    "Tries"
+  ],
+  "skillIds": [
+    "trie.prefix",
+    "trie.nodes"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>98-implement-trie-prefix-tree</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Implement Trie (Prefix Tree)\n\n## Problem Description\n\nImplement a trie (prefix tree) with the following operations:\n\n- insert(word): insert a word into the trie\n- search(word): return true if the word is in the trie\n- startsWith(prefix): return true if any previously inserted word starts with the given prefix\n\nWords and prefixes contain only lowercase English letters.\n\n## Input / Output\n\n### Operations\n\n- Trie() — create an empty trie\n- insert(word) — insert word\n- search(word) — check exact word presence\n- startsWith(prefix) — check prefix presence\n\n## Examples\n\n### Example 1\n\nInput:\n\n    Trie trie = new Trie();\n    trie.insert(\"apple\")\n    trie.search(\"apple\")\n    trie.search(\"app\")\n    trie.startsWith(\"app\")\n    trie.insert(\"app\")\n    trie.search(\"app\")\n\nOutput:\n\n    null\n    true\n    false\n    true\n    null\n    true\n\n## Constraints\n\n- 1 <= word.length, prefix.length <= 2000\n- word and prefix consist of lowercase English letters\n- At most 30,000 calls will be made to insert, search, and startsWith\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "class Completed {\n\n    private final TrieNode root;\n\n    public Completed() {\n        root = new TrieNode();\n    }\n\n    public void insert(String word) {\n\n        TrieNode node = root;\n        for (int i = 0; i < word.length(); i++) {\n            int index = word.charAt(i) - 'a';\n            if (node.children[index] == null) {\n                node.children[index] = new TrieNode();\n            }\n            node = node.children[index];\n        }\n        node.isWord = true;\n    }\n\n    public boolean search(String word) {\n\n        TrieNode node = find(word);\n        return node != null && node.isWord;\n    }\n\n    public boolean startsWith(String prefix) {\n\n        return find(prefix) != null;\n    }\n\n    private TrieNode find(String text) {\n\n        TrieNode node = root;\n        for (int i = 0; i < text.length(); i++) {\n            int index = text.charAt(i) - 'a';\n            if (node.children[index] == null) {\n                return null;\n            }\n            node = node.children[index];\n        }\n        return node;\n    }\n\n    private static class TrieNode {\n\n        private final TrieNode[] children = new TrieNode[26];\n        private boolean isWord;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public Solution() {\n    }\n\n    public void insert(String word) {\n    }\n\n    public boolean search(String word) {\n\n        return false;\n    }\n\n    public boolean startsWith(String prefix) {\n\n        return false;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertFalse;\nimport static org.junit.jupiter.api.Assertions.assertTrue;\n\n@DisplayName(\"100/98_implement_trie_prefix_tree (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldFollowOfficialExampleSequence() {\n\n        Solution trie = new Solution();\n\n        trie.insert(\"apple\");\n        assertTrue(trie.search(\"apple\"));\n        assertFalse(trie.search(\"app\"));\n        assertTrue(trie.startsWith(\"app\"));\n        trie.insert(\"app\");\n        assertTrue(trie.search(\"app\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnFalseForMissingWord() {\n\n        Solution trie = new Solution();\n\n        trie.insert(\"hello\");\n        assertFalse(trie.search(\"world\"));\n        assertFalse(trie.startsWith(\"wor\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldSupportMultipleWordsSharingPrefix() {\n\n        Solution trie = new Solution();\n\n        trie.insert(\"cat\");\n        trie.insert(\"car\");\n        trie.insert(\"card\");\n\n        assertTrue(trie.search(\"cat\"));\n        assertTrue(trie.search(\"car\"));\n        assertTrue(trie.search(\"card\"));\n        assertTrue(trie.startsWith(\"ca\"));\n        assertFalse(trie.search(\"ca\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldDistinguishPrefixFromFullWord() {\n\n        Solution trie = new Solution();\n\n        trie.insert(\"code\");\n        assertTrue(trie.startsWith(\"co\"));\n        assertFalse(trie.search(\"co\"));\n        assertTrue(trie.search(\"code\"));\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertFalse;\nimport static org.junit.jupiter.api.Assertions.assertTrue;\n\n@DisplayName(\"100/98_implement_trie_prefix_tree\")\nclass SolutionTest {\n\n    @Test\n    void shouldFollowOfficialExampleSequence() {\n\n        Completed trie = new Completed();\n\n        trie.insert(\"apple\");\n        assertTrue(trie.search(\"apple\"));\n        assertFalse(trie.search(\"app\"));\n        assertTrue(trie.startsWith(\"app\"));\n        trie.insert(\"app\");\n        assertTrue(trie.search(\"app\"));\n    }\n\n    @Test\n    void shouldReturnFalseForMissingWord() {\n\n        Completed trie = new Completed();\n\n        trie.insert(\"hello\");\n        assertFalse(trie.search(\"world\"));\n        assertFalse(trie.startsWith(\"wor\"));\n    }\n\n    @Test\n    void shouldSupportMultipleWordsSharingPrefix() {\n\n        Completed trie = new Completed();\n\n        trie.insert(\"cat\");\n        trie.insert(\"car\");\n        trie.insert(\"card\");\n\n        assertTrue(trie.search(\"cat\"));\n        assertTrue(trie.search(\"car\"));\n        assertTrue(trie.search(\"card\"));\n        assertTrue(trie.startsWith(\"ca\"));\n        assertFalse(trie.search(\"ca\"));\n    }\n\n    @Test\n    void shouldDistinguishPrefixFromFullWord() {\n\n        Completed trie = new Completed();\n\n        trie.insert(\"code\");\n        assertTrue(trie.startsWith(\"co\"));\n        assertFalse(trie.search(\"co\"));\n        assertTrue(trie.search(\"code\"));\n    }\n}\n"
+    }
+  ]
+}

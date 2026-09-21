@@ -1,0 +1,39 @@
+{
+  "id": "zigzag-conversion",
+  "title": "Zigzag Conversion",
+  "sourcePath": "30/22_zigzag_conversion",
+  "hash": "818f6652b7281541abcb82d074403af73653c5805e44d112dfe803d174050ec5",
+  "topics": [
+    "Arrays & strings"
+  ],
+  "skillIds": [
+    "scan.invariant",
+    "strings.boundaries"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>22-zigzag-conversion</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Zigzag Conversion\n\n## Problem Description\n\nWrite string `s` in a zigzag down-and-up pattern across `numRows` rows, then read the characters **row by row** left to right to form a new string.\n\nReturn that converted string.\n\n## Clarifications\n\n- Zigzag means: go down the rows 0..numRows-1, then diagonally up to row 0, and repeat, placing one character at a time.\n- If `numRows = 1`, the string is unchanged (no zigzag).\n- Reading is by rows, not by the visual diagonal order.\n\nIllustration for `s = \"PAYPALISHIRING\"`, `numRows = 3`:\n\n    P   A   H   N\n    A P L S I I G\n    Y   I   R\n\nRow-by-row reading: `\"PAHNAPLSIIGYIR\"`.\n\n## Input\n\n- `s`: input string\n- `numRows`: number of zigzag rows\n\n## Output\n\n- Zigzag-converted string\n\n## Examples\n\n### Example 1\n\nInput:\n\n    s = \"PAYPALISHIRING\"\n    numRows = 3\n\nOutput:\n\n    \"PAHNAPLSIIGYIR\"\n\n### Example 2\n\nInput:\n\n    s = \"PAYPALISHIRING\"\n    numRows = 4\n\nOutput:\n\n    \"PINALSIGYAHRPI\"\n\nExplanation pattern:\n\n    P     I    N\n    A   L S  I G\n    Y A   H R\n    P     I\n\n### Example 3\n\nInput:\n\n    s = \"A\"\n    numRows = 1\n\nOutput:\n\n    \"A\"\n\n### Example 4\n\nInput:\n\n    s = \"AB\"\n    numRows = 1\n\nOutput:\n\n    \"AB\"\n\n## Constraints\n\n- 1 <= s.length <= 1,000\n- s consists of English letters (lower/upper), commas, and periods\n- 1 <= numRows <= 1,000\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "class Completed {\n\n    public String convert(String s, int numRows) {\n\n        if (numRows == 1 || numRows >= s.length()) {\n            return s;\n        }\n\n        StringBuilder[] rows = new StringBuilder[numRows];\n\n        for (int i = 0; i < numRows; i++) {\n            rows[i] = new StringBuilder();\n        }\n\n        int row = 0;\n        int direction = 1;\n\n        for (int i = 0; i < s.length(); i++) {\n\n            rows[row].append(s.charAt(i));\n\n            if (row == 0) {\n                direction = 1;\n            } else if (row == numRows - 1) {\n                direction = -1;\n            }\n\n            row += direction;\n        }\n\n        StringBuilder result = new StringBuilder();\n\n        for (StringBuilder current : rows) {\n            result.append(current);\n        }\n\n        return result.toString();\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public String convert(String s, int numRows) {\n\n        return \"\";\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"30/22_zigzag_conversion (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldConvertWithThreeRows() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            \"PAHNAPLSIIGYIR\",\n            solution.convert(\"PAYPALISHIRING\", 3)\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldConvertWithFourRows() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\n            \"PINALSIGYAHRPI\",\n            solution.convert(\"PAYPALISHIRING\", 4)\n        );\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleSingleCharacter() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\"A\", solution.convert(\"A\", 1));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleSingleRow() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\"ABC\", solution.convert(\"ABC\", 1));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleMoreRowsThanCharacters() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\"AB\", solution.convert(\"AB\", 5));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldConvertWithTwoRows() {\n\n        Solution solution = new Solution();\n\n        assertEquals(\"ACBD\", solution.convert(\"ABCD\", 2));\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"30/22_zigzag_conversion\")\nclass SolutionTest {\n\n    @Test\n    void shouldConvertWithThreeRows() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            \"PAHNAPLSIIGYIR\",\n            solution.convert(\"PAYPALISHIRING\", 3)\n        );\n    }\n\n    @Test\n    void shouldConvertWithFourRows() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\n            \"PINALSIGYAHRPI\",\n            solution.convert(\"PAYPALISHIRING\", 4)\n        );\n    }\n\n    @Test\n    void shouldHandleSingleCharacter() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\"A\", solution.convert(\"A\", 1));\n    }\n\n    @Test\n    void shouldHandleSingleRow() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\"ABC\", solution.convert(\"ABC\", 1));\n    }\n\n    @Test\n    void shouldHandleMoreRowsThanCharacters() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\"AB\", solution.convert(\"AB\", 5));\n    }\n\n    @Test\n    void shouldConvertWithTwoRows() {\n\n        Completed solution = new Completed();\n\n        assertEquals(\"ACBD\", solution.convert(\"ABCD\", 2));\n    }\n}\n"
+    }
+  ]
+}

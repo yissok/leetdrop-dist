@@ -1,0 +1,44 @@
+{
+  "id": "merge-k-sorted-lists",
+  "title": "Merge k Sorted Lists",
+  "sourcePath": "120/111_merge_k_sorted_lists",
+  "hash": "78ecf7fb4cda1189d156189335b96bc2b3e1d14395dd04edc93a5b0775467cb1",
+  "topics": [
+    "Heaps"
+  ],
+  "skillIds": [
+    "java.comparator",
+    "heap.dynamic-extreme",
+    "linked-list.rewire"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>111-merge-k-sorted-lists</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Merge k Sorted Lists\n\n## Problem Description\n\nYou are given an array of k linked-lists `lists`, each linked-list is sorted in ascending order.\n\nMerge all the linked-lists into one sorted linked-list and return it.\n\n## Input / Output\n\n### Input\n\n- An array of k sorted linked lists\n\n### Output\n\n- The head of one merged sorted linked list\n\n## Examples\n\n### Example 1\n\nInput:\n\n    lists = [[1,4,5],[1,3,4],[2,6]]\n\nOutput:\n\n    [1,1,2,3,4,4,5,6]\n\n### Example 2\n\nInput:\n\n    lists = []\n\nOutput:\n\n    []\n\n### Example 3\n\nInput:\n\n    lists = [[]]\n\nOutput:\n\n    []\n\n## Constraints\n\n- k == lists.length\n- 0 <= k <= 10,000\n- 0 <= lists[i].length <= 500\n- -10^4 <= lists[i][j] <= 10^4\n- lists[i] is sorted in ascending order\n- The sum of lists[i].length will not exceed 10,000\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "import java.util.Comparator;\nimport java.util.PriorityQueue;\n\nclass Completed {\n\n    public ListNode mergeKLists(ListNode[] lists) {\n\n        if (lists == null || lists.length == 0) {\n            return null;\n        }\n\n        PriorityQueue<ListNode> heap = new PriorityQueue<ListNode>(\n            new Comparator<ListNode>() {\n                @Override\n                public int compare(ListNode a, ListNode b) {\n                    return a.val - b.val;\n                }\n            }\n        );\n\n        for (int i = 0; i < lists.length; i++) {\n            if (lists[i] != null) {\n                heap.offer(lists[i]);\n            }\n        }\n\n        ListNode dummy = new ListNode(0);\n        ListNode current = dummy;\n\n        while (!heap.isEmpty()) {\n\n            ListNode node = heap.poll();\n            current.next = node;\n            current = current.next;\n\n            if (node.next != null) {\n                heap.offer(node.next);\n            }\n        }\n\n        return dummy.next;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/ListNode.java",
+      "content": "class ListNode {\n\n    int val;\n    ListNode next;\n\n    ListNode() {\n    }\n\n    ListNode(int val) {\n        this.val = val;\n    }\n\n    ListNode(int val, ListNode next) {\n        this.val = val;\n        this.next = next;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public ListNode mergeKLists(ListNode[] lists) {\n\n        return null;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\nimport static org.junit.jupiter.api.Assertions.assertNull;\n\n@DisplayName(\"120/111_merge_k_sorted_lists (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldMergeThreeSortedLists() {\n\n        Solution solution = new Solution();\n\n        ListNode a = new ListNode(1, new ListNode(4, new ListNode(5)));\n        ListNode b = new ListNode(1, new ListNode(3, new ListNode(4)));\n        ListNode c = new ListNode(2, new ListNode(6));\n\n        ListNode result = solution.mergeKLists(new ListNode[]{a, b, c});\n\n        assertEquals(1, result.val);\n        assertEquals(1, result.next.val);\n        assertEquals(2, result.next.next.val);\n        assertEquals(3, result.next.next.next.val);\n        assertEquals(4, result.next.next.next.next.val);\n        assertEquals(4, result.next.next.next.next.next.val);\n        assertEquals(5, result.next.next.next.next.next.next.val);\n        assertEquals(6, result.next.next.next.next.next.next.next.val);\n        assertNull(result.next.next.next.next.next.next.next.next);\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnNullForEmptyArray() {\n\n        Solution solution = new Solution();\n\n        assertNull(solution.mergeKLists(new ListNode[]{}));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnNullForArrayOfEmptyLists() {\n\n        Solution solution = new Solution();\n\n        assertNull(solution.mergeKLists(new ListNode[]{null}));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldMergeTwoLists() {\n\n        Solution solution = new Solution();\n\n        ListNode a = new ListNode(1, new ListNode(2));\n        ListNode b = new ListNode(1, new ListNode(3));\n\n        ListNode result = solution.mergeKLists(new ListNode[]{a, b});\n\n        assertEquals(1, result.val);\n        assertEquals(1, result.next.val);\n        assertEquals(2, result.next.next.val);\n        assertEquals(3, result.next.next.next.val);\n        assertNull(result.next.next.next.next);\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\nimport static org.junit.jupiter.api.Assertions.assertNull;\n\n@DisplayName(\"120/111_merge_k_sorted_lists\")\nclass SolutionTest {\n\n    @Test\n    void shouldMergeThreeSortedLists() {\n\n        Completed solution = new Completed();\n\n        ListNode a = new ListNode(1, new ListNode(4, new ListNode(5)));\n        ListNode b = new ListNode(1, new ListNode(3, new ListNode(4)));\n        ListNode c = new ListNode(2, new ListNode(6));\n\n        ListNode result = solution.mergeKLists(new ListNode[]{a, b, c});\n\n        assertEquals(1, result.val);\n        assertEquals(1, result.next.val);\n        assertEquals(2, result.next.next.val);\n        assertEquals(3, result.next.next.next.val);\n        assertEquals(4, result.next.next.next.next.val);\n        assertEquals(4, result.next.next.next.next.next.val);\n        assertEquals(5, result.next.next.next.next.next.next.val);\n        assertEquals(6, result.next.next.next.next.next.next.next.val);\n        assertNull(result.next.next.next.next.next.next.next.next);\n    }\n\n    @Test\n    void shouldReturnNullForEmptyArray() {\n\n        Completed solution = new Completed();\n\n        assertNull(solution.mergeKLists(new ListNode[]{}));\n    }\n\n    @Test\n    void shouldReturnNullForArrayOfEmptyLists() {\n\n        Completed solution = new Completed();\n\n        assertNull(solution.mergeKLists(new ListNode[]{null}));\n    }\n\n    @Test\n    void shouldMergeTwoLists() {\n\n        Completed solution = new Completed();\n\n        ListNode a = new ListNode(1, new ListNode(2));\n        ListNode b = new ListNode(1, new ListNode(3));\n\n        ListNode result = solution.mergeKLists(new ListNode[]{a, b});\n\n        assertEquals(1, result.val);\n        assertEquals(1, result.next.val);\n        assertEquals(2, result.next.next.val);\n        assertEquals(3, result.next.next.next.val);\n        assertNull(result.next.next.next.next);\n    }\n}\n"
+    }
+  ]
+}

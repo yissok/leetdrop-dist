@@ -1,0 +1,39 @@
+{
+  "id": "valid-palindrome",
+  "title": "Valid Palindrome",
+  "sourcePath": "30/25_valid_palindrome",
+  "hash": "e1c7332109bc16eb009f87b0966f74cb3412192de271faf4441672219a540c7f",
+  "topics": [
+    "Arrays & strings"
+  ],
+  "skillIds": [
+    "two-pointers.elimination",
+    "strings.boundaries"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>25-valid-palindrome</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Valid Palindrome\n\n## Problem Description\n\nA phrase is a palindrome if, after converting letters to lowercase and removing all non-alphanumeric characters, it reads the same forward and backward.\n\nGiven string `s`, return whether it is a palindrome under those rules.\n\n## Clarifications\n\n- Keep only letters and digits; ignore spaces and punctuation.\n- Case does not matter (`A` matches `a`).\n- An empty filtered string is considered a palindrome (return `true`).\n- Digits are alphanumeric and must match exactly.\n\n## Input\n\n- `s`: input phrase\n\n## Output\n\n- `true` or `false`\n\n## Examples\n\n### Example 1\n\nInput:\n\n    s = \"A man, a plan, a canal: Panama\"\n\nOutput:\n\n    true\n\nExplanation:\n\n    Filtered lowercase: \"amanaplanacanalpanama\", which is a palindrome.\n\n### Example 2\n\nInput:\n\n    s = \"race a car\"\n\nOutput:\n\n    false\n\nExplanation:\n\n    Filtered: \"raceacar\" ≠ reverse.\n\n### Example 3\n\nInput:\n\n    s = \" \"\n\nOutput:\n\n    true\n\nExplanation:\n\n    After removing spaces, nothing remains; treated as palindrome.\n\n### Example 4\n\nInput:\n\n    s = \"0P\"\n\nOutput:\n\n    false\n\nExplanation:\n\n    Digits and letters both count: \"0p\" ≠ \"p0\".\n\n## Constraints\n\n- 1 <= s.length <= 200,000\n- s consists only of printable ASCII characters\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "class Completed {\n\n    public boolean isPalindrome(String s) {\n\n        int left = 0;\n        int right = s.length() - 1;\n\n        while (left < right) {\n\n            while (left < right && !Character.isLetterOrDigit(s.charAt(left))) {\n                left++;\n            }\n\n            while (left < right && !Character.isLetterOrDigit(s.charAt(right))) {\n                right--;\n            }\n\n            if (Character.toLowerCase(s.charAt(left))\n                != Character.toLowerCase(s.charAt(right))) {\n\n                return false;\n            }\n\n            left++;\n            right--;\n        }\n\n        return true;\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public boolean isPalindrome(String s) {\n\n        return false;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertFalse;\nimport static org.junit.jupiter.api.Assertions.assertTrue;\n\n@DisplayName(\"30/25_valid_palindrome (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldAcceptClassicPalindrome() {\n\n        Solution solution = new Solution();\n\n        assertTrue(solution.isPalindrome(\"A man, a plan, a canal: Panama\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldRejectNonPalindrome() {\n\n        Solution solution = new Solution();\n\n        assertFalse(solution.isPalindrome(\"race a car\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldAcceptEmptyAfterCleaning() {\n\n        Solution solution = new Solution();\n\n        assertTrue(solution.isPalindrome(\" \"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldAcceptSingleCharacter() {\n\n        Solution solution = new Solution();\n\n        assertTrue(solution.isPalindrome(\"a\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleDigits() {\n\n        Solution solution = new Solution();\n\n        assertTrue(solution.isPalindrome(\"0P0\"));\n        assertFalse(solution.isPalindrome(\"0P\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldIgnorePunctuationOnly() {\n\n        Solution solution = new Solution();\n\n        assertTrue(solution.isPalindrome(\",.\"));\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertFalse;\nimport static org.junit.jupiter.api.Assertions.assertTrue;\n\n@DisplayName(\"30/25_valid_palindrome\")\nclass SolutionTest {\n\n    @Test\n    void shouldAcceptClassicPalindrome() {\n\n        Completed solution = new Completed();\n\n        assertTrue(solution.isPalindrome(\"A man, a plan, a canal: Panama\"));\n    }\n\n    @Test\n    void shouldRejectNonPalindrome() {\n\n        Completed solution = new Completed();\n\n        assertFalse(solution.isPalindrome(\"race a car\"));\n    }\n\n    @Test\n    void shouldAcceptEmptyAfterCleaning() {\n\n        Completed solution = new Completed();\n\n        assertTrue(solution.isPalindrome(\" \"));\n    }\n\n    @Test\n    void shouldAcceptSingleCharacter() {\n\n        Completed solution = new Completed();\n\n        assertTrue(solution.isPalindrome(\"a\"));\n    }\n\n    @Test\n    void shouldHandleDigits() {\n\n        Completed solution = new Completed();\n\n        assertTrue(solution.isPalindrome(\"0P0\"));\n        assertFalse(solution.isPalindrome(\"0P\"));\n    }\n\n    @Test\n    void shouldIgnorePunctuationOnly() {\n\n        Completed solution = new Completed();\n\n        assertTrue(solution.isPalindrome(\",.\"));\n    }\n}\n"
+    }
+  ]
+}

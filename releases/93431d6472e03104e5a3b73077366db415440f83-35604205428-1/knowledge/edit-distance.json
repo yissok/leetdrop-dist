@@ -1,0 +1,38 @@
+{
+  "id": "edit-distance",
+  "title": "Edit Distance",
+  "sourcePath": "150/147_edit_distance",
+  "hash": "7c43212baf9371202210861acfff3242531b5c068c9ab02ff740e79cd814d9d9",
+  "topics": [
+    "Dynamic programming"
+  ],
+  "skillIds": [
+    "dp.state"
+  ],
+  "files": [
+    {
+      "name": "pom.xml",
+      "content": "<project xmlns=\"http://maven.apache.org/POM/4.0.0\">\n\n    <modelVersion>4.0.0</modelVersion>\n\n    <groupId>leetcode</groupId>\n    <artifactId>147-edit-distance</artifactId>\n    <version>1.0</version>\n\n    <properties>\n        <maven.compiler.source>8</maven.compiler.source>\n        <maven.compiler.target>8</maven.compiler.target>\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.junit.jupiter</groupId>\n            <artifactId>junit-jupiter</artifactId>\n            <version>5.12.2</version>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.apache.maven.plugins</groupId>\n                <artifactId>maven-surefire-plugin</artifactId>\n                <version>3.5.3</version>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n"
+    },
+    {
+      "name": "README.md",
+      "content": "# Edit Distance\n\n## Problem Description\n\nGiven two strings `word1` and `word2`, return the minimum number of operations required to convert `word1` into `word2`.\n\nYou may perform the following operations on a word:\n\n- Insert a character\n- Delete a character\n- Replace a character\n\n## Input / Output\n\n### Input\n\n- Two strings `word1` and `word2`\n\n### Output\n\n- The minimum number of operations to convert `word1` to `word2`\n\n## Examples\n\n### Example 1\n\nInput:\n\n    word1 = \"horse\"\n    word2 = \"ros\"\n\nOutput:\n\n    3\n\nExplanation:\n\nhorse -> rorse (replace h with r), rorse -> rose (remove r), rose -> ros (remove e).\n\n### Example 2\n\nInput:\n\n    word1 = \"intention\"\n    word2 = \"execution\"\n\nOutput:\n\n    5\n\n## Constraints\n\n- 0 <= word1.length, word2.length <= 500\n- word1 and word2 consist of lowercase English letters\n"
+    },
+    {
+      "name": "src/main/java/Completed.java",
+      "content": "class Completed {\n\n    public int minDistance(String word1, String word2) {\n\n        int m = word1.length();\n        int n = word2.length();\n        int[][] dp = new int[m + 1][n + 1];\n\n        for (int i = 0; i <= m; i++) {\n            dp[i][0] = i;\n        }\n\n        for (int j = 0; j <= n; j++) {\n            dp[0][j] = j;\n        }\n\n        for (int i = 1; i <= m; i++) {\n            for (int j = 1; j <= n; j++) {\n\n                if (word1.charAt(i - 1) == word2.charAt(j - 1)) {\n                    dp[i][j] = dp[i - 1][j - 1];\n                } else {\n                    dp[i][j] = 1 + Math.min(\n                        dp[i - 1][j - 1],\n                        Math.min(dp[i - 1][j], dp[i][j - 1])\n                    );\n                }\n            }\n        }\n\n        return dp[m][n];\n    }\n}\n"
+    },
+    {
+      "name": "src/main/java/Solution.java",
+      "content": "class Solution {\n\n    public int minDistance(String word1, String word2) {\n\n        return 0;\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionIncompleteTest.java",
+      "content": "import org.junit.jupiter.api.Disabled;\nimport org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"150/147_edit_distance (incomplete)\")\nclass SolutionIncompleteTest {\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnDistanceForExample1() {\n\n        Solution solution = new Solution();\n\n        assertEquals(3, solution.minDistance(\"horse\", \"ros\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnDistanceForExample2() {\n\n        Solution solution = new Solution();\n\n        assertEquals(5, solution.minDistance(\"intention\", \"execution\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldReturnZeroForIdenticalWords() {\n\n        Solution solution = new Solution();\n\n        assertEquals(0, solution.minDistance(\"abc\", \"abc\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleEmptyFirstWord() {\n\n        Solution solution = new Solution();\n\n        assertEquals(3, solution.minDistance(\"\", \"abc\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleEmptySecondWord() {\n\n        Solution solution = new Solution();\n\n        assertEquals(3, solution.minDistance(\"abc\", \"\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleBothEmpty() {\n\n        Solution solution = new Solution();\n\n        assertEquals(0, solution.minDistance(\"\", \"\"));\n    }\n\n    @Test\n    @Disabled(\"Solution.java is intentionally incomplete\")\n    void shouldHandleSingleReplacement() {\n\n        Solution solution = new Solution();\n\n        assertEquals(1, solution.minDistance(\"a\", \"b\"));\n    }\n}\n"
+    },
+    {
+      "name": "src/test/java/SolutionTest.java",
+      "content": "import org.junit.jupiter.api.DisplayName;\nimport org.junit.jupiter.api.Test;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\n\n@DisplayName(\"150/147_edit_distance\")\nclass SolutionTest {\n\n    @Test\n    void shouldReturnDistanceForExample1() {\n\n        Completed solution = new Completed();\n\n        assertEquals(3, solution.minDistance(\"horse\", \"ros\"));\n    }\n\n    @Test\n    void shouldReturnDistanceForExample2() {\n\n        Completed solution = new Completed();\n\n        assertEquals(5, solution.minDistance(\"intention\", \"execution\"));\n    }\n\n    @Test\n    void shouldReturnZeroForIdenticalWords() {\n\n        Completed solution = new Completed();\n\n        assertEquals(0, solution.minDistance(\"abc\", \"abc\"));\n    }\n\n    @Test\n    void shouldHandleEmptyFirstWord() {\n\n        Completed solution = new Completed();\n\n        assertEquals(3, solution.minDistance(\"\", \"abc\"));\n    }\n\n    @Test\n    void shouldHandleEmptySecondWord() {\n\n        Completed solution = new Completed();\n\n        assertEquals(3, solution.minDistance(\"abc\", \"\"));\n    }\n\n    @Test\n    void shouldHandleBothEmpty() {\n\n        Completed solution = new Completed();\n\n        assertEquals(0, solution.minDistance(\"\", \"\"));\n    }\n\n    @Test\n    void shouldHandleSingleReplacement() {\n\n        Completed solution = new Completed();\n\n        assertEquals(1, solution.minDistance(\"a\", \"b\"));\n    }\n}\n"
+    }
+  ]
+}
